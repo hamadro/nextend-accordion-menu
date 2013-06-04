@@ -1,20 +1,21 @@
-=== Nextend Accordion Menu Lite ===
+=== Nextend Accordion Menu ===
 Contributors: nextendweb 
 Tags: accordion menu, menu, navigation, accordion, widget, themes, nextend
 Donate link: https://www.facebook.com/nextendweb
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 9.1.1
+Stable tag: 9.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-User-friendly, highly customizable and easy to integrate menu solution to build custom accordion menus from any WordPress menu.
+User-friendly, highly customizable and easy to integrate menu solution to build custom accordion menu from any WordPress menu.
 
 == Description ==
 
->[DEMO](http://demo.nextendweb.com/accordionmenu/)  |  [PRO VERSION PAGE](http://www.nextendweb.com/accordion-menu/)  |  [DOCUMENTATION](http://www.nextendweb.com/wiki/accordion-menu-documentation/)
 
-Nextend Accordion Menu gives you complete control over menu levels, colors, animation effects and more. All themes comes with their own settings and preset skins that can be customized without any HTML or CSS knowledge. You can add menus with the help of widgets and shortcodes.
+Nextend Accordion Menu gives you complete control over menu levels, colors, animation effects and more. All accordion menu themes comes with their own settings and preset skins that can be customized without any HTML or CSS knowledge. You can define multiple instance of accordion menu then you can add the created accordion menu with the help of widgets and shortcodes.
+
+>[DEMO](http://demo.nextendweb.com/accordionmenu/)  |  [PRO VERSION PAGE](http://www.nextendweb.com/accordion-menu/)  |  [DOCUMENTATION](http://www.nextendweb.com/wiki/accordion-menu-documentation/)
 
 Accordion menus are used widely in navigation, sliding, minimizing and maximizing content. They can be expanded whenever and however needed, saving valuable space while displaying a wide range of content. It gives a powerful user navigation experience for you and your visitors
 
@@ -46,6 +47,9 @@ Accordion menus are used widely in navigation, sliding, minimizing and maximizin
 4. Screenshot from the backend
 
 == Changelog ==
+
+= 9.1.2 =
+* Some readme.txt fix
 
 = 9.1.1 =
 * Less compiler conflict fix
