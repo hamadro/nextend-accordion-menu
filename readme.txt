@@ -4,7 +4,7 @@ Tags: accordion menu, menu, navigation, accordion, widget, themes, nextend
 Donate link: https://www.facebook.com/nextendweb
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 9.1.4
+Stable tag: 9.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,11 +35,11 @@ Accordion menu used widely in navigation, sliding, minimizing and maximizing con
 
 == Installation ==
 
-1. Upload the plugin through ‘Plugins > Add New > Upload’ interface or upload nextend-accordion-menu folder to the ‘/wp-content/plugins/’ directory.
+1. Upload the plugin through 'Plugins > Add New > Upload' interface or upload nextend-accordion-menu folder to the '/wp-content/plugins/' directory.
 2. Activate the Nextend Accordion Menu plugin through the 'Plugins' menu in WordPress.
-3. *Optional: If you would like to create a new Accordion Menu, then you need a custom menu from WordPress. Use an existing or create a new ‘Appearance > Menus’ menu.*
-4. Create a new Accordion Menu: Click on the ‘Accordion Menus > Add New’ menu, add a title, choose a source from the WordPress menus and finally click on the Save button. Now you can customize your menu's themes level by level and set the other options.
-5. In the ‘Appearance > Widgets’ menu select the Nextend Accordion Menu widget and add to one of your widget areas. Select one of your accordion menu, set the required settings and save your widget.
+3. *Optional: If you would like to create a new Accordion Menu, then you need a custom menu from WordPress. Use an existing or create a new 'Appearance > Menus' menu.*
+4. Create a new Accordion Menu: Click on the 'Accordion Menus > Add New' menu, add a title, choose a source from the WordPress menus and finally click on the Save button. Now you can customize your menu's themes level by level and set the other options.
+5. In the 'Appearance > Widgets' menu select the Nextend Accordion Menu widget and add to one of your widget areas. Select one of your accordion menu, set the required settings and save your widget.
 6. [Check our official documentation for more information](http://www.nextendweb.com/wiki/installation-on-wordpress/) 
 
 == Frequently Asked Questions ==
@@ -74,6 +74,9 @@ Please write us via our [Support Form](http://www.nextendweb.com/help/support/)!
 5. Screenshot from the theme management, set everything without CSS coding.
 
 == Changelog ==
+
+= 9.1.5 =
+* Fix: Sometimes wrong item was marked in the menu as active. Now it works fine.
 
 = 9.1.4 =
 * FAQ added
