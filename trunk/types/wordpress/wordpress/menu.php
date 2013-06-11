@@ -67,18 +67,25 @@ class NextendTreeWordpress extends NextendTreebaseWordpress {
     }
 
     function getActiveItem() {
-        global $post;
-        $current = wp_get_nav_menu_items($this->_config['menu'], array(
-            'posts_per_page' => -1,
-            'meta_key' => '_menu_item_object_id',
-            'meta_value' => $post->ID // the currently displayed post
-        ));
-        if (is_array($current) && count($current) > 0) {
-            $active = new stdClass();
-            $active->id = $current[0]->ID;
-            return $active;
+        $this->active = null;
+        add_filter( 'wp_nav_menu_objects', array($this, 'find_active') );
+        ob_start();
+        wp_nav_menu( array('menu' => $this->_config['menu'] ));
+        ob_end_clean();
+        remove_filter( 'wp_nav_menu_objects', array($this, 'find_active') ); 
+        return $this->active;
+    }
+    
+    function find_active( $sorted_menu_items ){
+        foreach ( $sorted_menu_items as $menu_item ) {
+            if ( $menu_item->current ) {
+                $active = new stdClass();
+                $active->id = $menu_item->ID;
+                $this->active = $active;
+                break;
+            }
         }
-        return null;
+        return $sorted_menu_items;
     }
 
     function getItemsTree() {

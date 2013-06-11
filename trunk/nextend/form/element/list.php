@@ -22,7 +22,7 @@ class NextendElementList extends NextendElementHidden {
         
         
         $html = "<div class='nextend-list' style='".NextendXmlGetAttribute($this->_xml, 'style')."'>";
-        $html.= "<select id='" . $this->_id . "_select' name='select" . $this->_inputname . "' ".$size.$this->isMultiple()."  autocomplete='off'>";
+        $html.= "<select id='" . $this->_id . "_select' class='nextend-select' name='select" . $this->_inputname . "' ".$size.$this->isMultiple()."  autocomplete='off'>";
         $html.= $this->generateOptions($this->_xml);
         if($this->_xml->optgroup){
             $html.= $this->generateOptgroup($this->_xml);
