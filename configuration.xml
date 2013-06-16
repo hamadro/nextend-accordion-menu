@@ -1,7 +1,6 @@
 <root>
-    <version>9.0.0</version>
     <params name="basic" label="Basic parameters">
-        <param name="type" type="menutype" label="Type" default="wordpress" file="type.xml" description="Choose the source for the menu. Click on the SETTINGS button for more options." />
+        <param name="type"  type="menutype" label="Type" default="joomla" file="type.xml" description="Choose the source component for the menu. Click on the SETTINGS button for more options." />
         <param name="theme" type="menutheme" label="Theme" default="clean" file="theme.xml" description="Change the look of your menu. Click on the SETTINGS button for more options." />
         <param name="moduleshowtitle" type="onoff" default="0" label="Title theme" description="If enabled, the menu theme will skin your module title. To prevent duplicated title, switch off the module Show title option." />
         <param name="parentlink" type="onoff" default="0" label="Parent items as link" description="If enabled, the items which have subitems will be urls." />
@@ -48,8 +47,120 @@
         </param>
     </params>
     <params name="animation" label="Animation parameters">
-        <param name="css3animation" type="onoff" default="0" label="CSS3 animations" description="This enables the CSS3 transition for animations if the browser support it. If not, the default javascript animation used." />
-        <param name="animation" type="mixed" label="Animation" description="Bounces are not available for CSS3 animations." default="500|*|dojo.fx.easing.cubicInOut|*|dojo.fx.easing.cubicInOut">
+        <param name="animationskins" type="mixed" default="" label="Animation type" description="Choose one of our pre-defined animation skin or create a new. The CSS3 and the transform animations are very special and not supported by all browser!">
+            <param type="skin" label="Animation type">
+                <off label="Off - reset">
+                    <transform>0</transform>
+                    <transformperspective>0</transformperspective>
+                    <transformorigin>center|*|center|*|0</transformorigin>
+                    <transformtranslate>0|*|0|*|0</transformtranslate>
+                    <transformscale>1.0|*|1.0|*|1.0</transformscale>
+                    <transformrotate>0|*|0|*|0</transformrotate>
+                </off>                
+                <accordion label="Accordion (default)">
+                    <animation>600|*|dojo.fx.easing.cubicInOut|*|dojo.fx.easing.cubicInOut</animation>
+                    <snaptobottom>0</snaptobottom>
+                    <css3animation>1</css3animation>
+                    <transform>0</transform>
+                    <transformperspective>800</transformperspective>
+                    <transformorigin>0|*|0|*|0</transformorigin>
+                    <transformtranslate>0|*|0|*|0</transformtranslate>
+                    <transformscale>1.0|*|1.0|*|1.0</transformscale>
+                    <transformrotate>0|*|0|*|0</transformrotate>
+                </accordion>                
+                <accordionopacity label="Accordion with opacity">
+                    <animation>600|*|dojo.fx.easing.cubicInOut|*|dojo.fx.easing.cubicInOut</animation>
+                    <snaptobottom>0</snaptobottom>
+                    <css3animation>1</css3animation>
+                    <transform>1</transform>
+                    <opacity>0</opacity>
+                    <transformperspective>800</transformperspective>
+                    <transformorigin>0|*|0|*|0</transformorigin>
+                    <transformtranslate>0|*|0|*|0</transformtranslate>
+                    <transformscale>1.0|*|1.0|*|1.0</transformscale>
+                    <transformrotate>0|*|0|*|0</transformrotate>
+                </accordionopacity>
+                <fliptop label="Flip top">
+                    <animation>600|*|dojo.fx.easing.cubicInOut|*|dojo.fx.easing.cubicInOut</animation>
+                    <snaptobottom>0</snaptobottom>
+                    <css3animation>1</css3animation>
+                    <transform>1</transform>
+                    <opacity>0</opacity>
+                    <transformperspective>800</transformperspective>
+                    <transformorigin>center|*|bottom|*|0</transformorigin>
+                    <transformtranslate>0|*|0|*|0</transformtranslate>
+                    <transformscale>1.0|*|1.0|*|1.0</transformscale>
+                    <transformrotate>90|*|0|*|0</transformrotate>
+                </fliptop>
+                <flipleft label="Flip left">
+                    <snaptobottom>1</snaptobottom>
+                    <css3animation>1</css3animation>
+                    <transform>1</transform>                    
+                    <opacity>0.5</opacity>
+                    <transformperspective>800</transformperspective>
+                    <transformorigin>left|*|top|*|0</transformorigin>
+                    <transformtranslate>0|*|0|*|0</transformtranslate>
+                    <transformscale>1.0|*|1.0|*|1.0</transformscale>
+                    <transformrotate>0|*|90|*|0</transformrotate>
+                </flipleft>
+                <scaleup label="Scale up">
+                    <snaptobottom>0</snaptobottom>
+                    <css3animation>1</css3animation>
+                    <transform>1</transform>
+                    <opacity>0.5</opacity>
+                    <transformperspective>800</transformperspective>
+                    <transformorigin>center|*|top|*|0</transformorigin>
+                    <transformtranslate>0|*|0|*|0</transformtranslate>
+                    <transformscale>0|*|0|*|0</transformscale>
+                    <transformrotate>-90|*|0|*|0</transformrotate>
+                </scaleup>                
+                <translateleft label="Translate left">
+                    <snaptobottom>0</snaptobottom>
+                    <css3animation>1</css3animation>
+                    <transform>1</transform>
+                    <opacity>0</opacity>
+                    <transformperspective>800</transformperspective>
+                    <transformorigin>0|*|0|*|0</transformorigin>
+                    <transformtranslate>-300|*|0|*|0</transformtranslate>
+                    <transformscale>1|*|1|*|1</transformscale>
+                    <transformrotate>0|*|0|*|0</transformrotate>
+                </translateleft>
+                <transleteright label="Translate right">
+                    <snaptobottom>0</snaptobottom>
+                    <css3animation>1</css3animation>
+                    <transform>1</transform>
+                    <opacity>0</opacity>
+                    <transformperspective>800</transformperspective>
+                    <transformorigin>0|*|0|*|0</transformorigin>
+                    <transformtranslate>300|*|0|*|0</transformtranslate>
+                    <transformscale>1|*|1|*|1</transformscale>
+                    <transformrotate>0|*|0|*|0</transformrotate>
+                </transleteright>
+                <transleteZ label="Translate Z and rotate">
+                    <snaptobottom>0</snaptobottom>
+                    <css3animation>1</css3animation>
+                    <transform>1</transform>
+                    <opacity>0</opacity>
+                    <transformperspective>800</transformperspective>
+                    <transformorigin>0|*|0|*|0</transformorigin>
+                    <transformtranslate>0|*|0|*|-300</transformtranslate>
+                    <transformscale>1|*|1|*|1</transformscale>
+                    <transformrotate>30|*|0|*|0</transformrotate>
+                </transleteZ>
+                <flipdown label="Flip down">
+                    <snaptobottom>0</snaptobottom>
+                    <css3animation>1</css3animation>
+                    <transform>1</transform>
+                    <opacity>0</opacity>
+                    <transformperspective>800</transformperspective>
+                    <transformorigin>0|*|0|*|0</transformorigin>
+                    <transformtranslate>0|*|0|*|-300</transformtranslate>
+                    <transformscale>1|*|1|*|0</transformscale>
+                    <transformrotate>0|*|0|*|-90</transformrotate>
+                </flipdown>
+            </param>
+        </param>
+        <param name="animation" type="mixed" label="Animation" description="Set the duration of the animation and the opening and closing easing. Bounces are not available for CSS3 animations." default="500|*|dojo.fx.easing.cubicInOut|*|dojo.fx.easing.cubicInOut">
             <param type="text" style="width: 50px;" label="Duration" description="">
                 <unit value="ms">ms</unit>
             </param>
@@ -57,6 +168,45 @@
             <param type="easing" label="Close easing" description="" />
         </param>
         <param name="snaptobottom" type="onoff" default="0" label="Snap submenus to bottom" description="Attaches the sublevel to the bottom, results interesting effect. Give it a try!" />
+        <param name="css3animation" type="onoff" default="0" label="CSS3 animations" description="This enables the CSS3 transition for animations if the browser support it. If not, the default javascript animation used." />
+        <param name="transform" type="onoff" default="0" label="Transform" description="With this parameter you turn on and off the CSS transform, the 6 parameter below doesn't work without this parameter. You have to turn on this parameter for the following parameters: Opacity, Perspective, Origin, Translate, Scale and Rotate." />
+        <param name="opacity" type="text" default="1.0" style="width:40px;" label="Opacity" description="You can set a value between 0 and 1 which determine the fading of the menu during the animation." />
+        <param name="transformperspective" type="text" style="width:40px;" label="Perspective" default="0" description="The perspective property defines how many pixels a 3D element is placed from the view. This property allows you to change the perspective on how 3D elements are viewed.">
+            <unit>px</unit>
+        </param>
+        <param name="transformorigin" type="mixed" label="Origin" default="center|*|center|*|0" description="The transform-origin property allows you to change the position on transformed elements.
+2D transformed element can change the x- and y-axis of the element. 3D transformed element can also change the z-axis of the element.">
+            <param type="text" label="X" style="width:70px;" />
+            <param type="text" label="Y" style="width:70px;" />
+            <param type="text" label="Z" style="width:70px;" />
+        </param>
+        <param name="transformtranslate" type="mixed" label="Translate" default="0|*|0|*|0" description="Moves an element sideways or up and down.">
+            <param type="text" label="X" style="width:40px;">
+                <unit>px</unit>
+            </param>
+            <param type="text" label="Y" style="width:40px;">
+                <unit>px</unit>
+            </param>
+            <param type="text" label="Z" style="width:40px;">
+                <unit>px</unit>
+            </param>
+        </param>
+        <param name="transformscale" type="mixed" label="Scale" default="1.0|*|1.0|*|1.0" description="The scale increases or decreases the size of element.">
+            <param type="text" label="X" style="width:40px;"/>
+            <param type="text" label="Y" style="width:40px;"/>
+            <param type="text" label="Z" style="width:40px;"/>
+        </param>
+        <param name="transformrotate" type="mixed" label="Rotate" default="0|*|0|*|0" description="Rotates clockwise from current position.">
+            <param type="text" label="X" style="width:40px;">
+                <unit>deg</unit>
+            </param>
+            <param type="text" label="Y" style="width:40px;">
+                <unit>deg</unit>
+            </param>
+            <param type="text" label="Z" style="width:40px;">
+                <unit>deg</unit>
+            </param>
+        </param>
     </params>
     <params name="other" label="Other parameters">
         <param name="class_sfx" type="text" default="" label="Menu class suffix" description="Add a CSS class to the menu" />

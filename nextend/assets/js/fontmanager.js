@@ -99,6 +99,12 @@
         
         save: function(){
             this.data.firsttab = this.firsttab;
+            for(var key in this.data){
+                if(key == 'firsttab') continue;
+                if(typeof this.data[key].paddingleft == 'undefined'){
+                    this.data[key].paddingleft = 0;
+                }
+            }
             this.onSave(dojo.toJson(this.data));
             this.data = null;
         },

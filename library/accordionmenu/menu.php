@@ -115,6 +115,21 @@ class NextendMenu {
             $context['animationopening'] = NextendAnimation::dojoEasingToCSSEasing($animation[1]);
             $context['animationclosing'] = NextendAnimation::dojoEasingToCSSEasing($animation[2]);
             $context['animationclosing'] = NextendAnimation::dojoEasingToCSSEasing($animation[2]);
+            
+            $transform = intval($data->get('transform', 0));
+            $context['transform'] = $transform;
+            if($transform){
+                $context['opacity'] = floatval($data->get('opacity', 1));
+                
+                $context['transformperspective'] = $data->get('transformperspective', 0).'px';
+                $context['transformorigin'] = implode(' ',NextendParse::parse($data->get('transformorigin', 'center|*|center|*|0')));
+                
+                $translate = NextendParse::parse($data->get('transformtranslate', '0|*|0|*|0'));
+                $scale = NextendParse::parse($data->get('transformscale', '1|*|1|*|1'));
+                $rotate = NextendParse::parse($data->get('transformrotate', '0|*|0|*|0'));
+                
+                $context['transformvalue'] = 'translate3d('.implode('px,',$translate).'px'.') scale3d('.implode(',',$scale).') rotateX('.$rotate[0].'deg) rotateY('.$rotate[1].'deg) rotateZ('.$rotate[2].'deg)';
+            }
         }
         include($this->_themePath.'context.php');
         $css->addCssFile(array(

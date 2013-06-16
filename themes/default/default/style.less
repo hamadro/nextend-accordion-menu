@@ -91,6 +91,7 @@
                 }
                 
                 a{
+                    padding-left: 0px !important;
                     &,
                     span{
                         d: e(~"@{level@{index}font-link}");
@@ -108,7 +109,7 @@
                 &.opening,
                 &.opened,
                 &.active{
-                    span,
+                    span.inner span,
                     a{
                         &,
                         span{
@@ -118,7 +119,7 @@
                 }
                 
                 &:HOVER{
-                    span,
+                    span.inner span,
                     a{
                         &,
                         span{

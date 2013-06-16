@@ -76,7 +76,11 @@ class NextendParseFont{
     }
     
     function parsePaddingleft($v){
-        return 'padding-left: '.$v.'px;';
+        $transition = '-moz-transition: padding-left 0.4s ease;';
+        $transition.= '-webkit-transition: padding-left 0.4s ease;';
+        $transition.= '-o-transition: padding-left 0.4s ease;';
+        $transition.= 'transition: padding-left 0.4s ease;';
+        return $transition.'padding-left: '.$v.'px;';
     }
     
     function parseAlign($v){

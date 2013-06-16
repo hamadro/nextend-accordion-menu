@@ -9,9 +9,9 @@
                 <unit value="em">em</unit>
             </param>
         </param>
-        <param name="lineheight" label="Line height" type="text" default="18px" width="70px" />
+        <param name="lineheight" label="Line height" type="text" default="18px" style="width:70px;" />
         <param name="decoration" label="Decoration" type="decoration" default="" />
-        <param name="paddingleft" label="Padding left" type="text" default="0" >
+        <param name="paddingleft" label="Padding left" type="text" default="0" style="width:40px;" >
             <unit value="px">px</unit>
         </param>
     </params>

@@ -2,6 +2,12 @@
     (~'@{class}'){
         overflow: hidden;
     }
+    .accordiontransforminit(@a) when (@a = 1) {
+        transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -webkit-transform: translate3d(0,0,0);
+    }
+    .accordiontransforminit(@transform);
     
     div,
     dl,
@@ -62,6 +68,7 @@
     }
     
     .css3animation(@a) when (@a = 1) {
+        .accordiontransform(@transform);
         &.opening{
             .transition(@animationinterval, @animationopening);
         }
@@ -70,6 +77,40 @@
         }
         &.opening.notransition,
         &.closing.notransition{
+            .notransition();
+        }
+    }
+    
+    .accordiontransform(@a) when (@a = 1) {
+        perspective: @transformperspective;
+        -webkit-perspective: @transformperspective;
+        > dl{
+            opacity: @opacity;
+            transform-origin:@transformorigin;
+            -ms-transform-origin:@transformorigin;
+            -webkit-transform-origin:@transformorigin;
+            transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            transform: @transformvalue;
+            -ms-transform: @transformvalue;
+            -webkit-transform: @transformvalue;
+            -webkit-backface-visibility: hidden;
+            outline: 1px solid transparent;
+        }
+        &.opening > dl,
+        &.opened > dl{
+            opacity: 1;
+            .transition(@animationinterval, @animationopening);
+            transform: translate3d(0,0,0) scale3d(1,1,1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            -ms-transform: translate3d(0,0,0) scale3d(1,1,1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            -webkit-transform: translate3d(0,0,0) scale3d(1,1,1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        }
+        &.closing > dl{
+            .transition(@animationinterval, @animationclosing);
+        }
+        &.opening.notransition > dl,
+        &.closing.notransition > dl{
             .notransition();
         }
     }
@@ -122,6 +163,7 @@
         vertical-align: middle;
         margin: -1px 5px 0 5px;
         min-width: 8px;
+        padding-left: 8px !important;
         padding: 0 8px;
         text-align: center !important;
         border: 1px solid rgba(255, 255, 255, 0.5);
