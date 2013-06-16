@@ -4,7 +4,7 @@ Tags: accordion menu, menu, navigation, accordion, widget, themes, nextend
 Donate link: https://www.facebook.com/nextendweb
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 9.1.5
+Stable tag: 9.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,9 @@ Please write us via our [Support Form](http://www.nextendweb.com/help/support/)!
 5. Screenshot from the theme management, set everything without CSS coding.
 
 == Changelog ==
+
+= 9.1.6 =
+* Fix: Installation problem
 
 = 9.1.5 =
 * Fix: Sometimes wrong item was marked in the menu as active. Now it works fine.
