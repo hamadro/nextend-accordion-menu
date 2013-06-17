@@ -3,6 +3,6 @@
 class NextendUri extends NextendUriAbstract{
     
     function NextendUri(){
-        $this->_baseuri = site_url().'/';
+        $this->_baseuri = WP_CONTENT_URL;
     }
 }

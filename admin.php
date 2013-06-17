@@ -62,6 +62,7 @@ function new_accordion_menu_post_type() {
 add_filter('post_updated_messages', 'new_accordion_menu_messages');
 function new_accordion_menu_messages($messages) {
     global $post, $post_ID;
+    add_action( 'wp_before_admin_bar_render', 'nextend_remove_custompost_type_view_admin_bar' );
     $messages['accordion_menu'] = array(
         0 => '',
         1 => __('Accordion Menu configuration updated.'),
@@ -246,4 +247,9 @@ function nextend_save_post_accordion_menu_class_meta($post_id, $post) {
     /* If there is no new meta value but an old value exists, delete it. */
     elseif ('' == $new_meta_value && $meta_value)
         delete_post_meta($post_id, $meta_key, $meta_value);
+}
+
+function nextend_remove_custompost_type_view_admin_bar() {
+    global $wp_admin_bar;
+    $wp_admin_bar->remove_menu('view');
 }

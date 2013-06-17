@@ -4,7 +4,7 @@ Tags: accordion menu, menu, navigation, accordion, widget, themes, nextend
 Donate link: https://www.facebook.com/nextendweb
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 9.1.7
+Stable tag: 9.1.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,12 @@ Please write us via our [Support Form](http://www.nextendweb.com/help/support/)!
 5. Screenshot from the theme management, set everything without CSS coding.
 
 == Changelog ==
+
+= 9.1.9 =
+* Fix: CSS is not loaded on backend
+
+= 9.1.8 =
+* Feature: plugin supports custom wp-content dir location
 
 = 9.1.7 =
 * Feature: New 2D and 3D animation for the accordion effect.

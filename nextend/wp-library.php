@@ -25,7 +25,7 @@ function nextend_generate() {
 function nextend_render_end($buffer){
     global $nextend_head;
     if($nextend_head != ''){
-        return preg_replace('/<\/(.*?)head>/', $nextend_head.'</${1}head>', $buffer, 1);
+        return preg_replace('/<\/head>/', $nextend_head.'</head>', $buffer, 1);
     }
     return $buffer;
 }
