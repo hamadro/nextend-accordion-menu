@@ -25,6 +25,9 @@
         },
         
         loadSubform: function(){
+            if(typeof window.nextendajax == 'undefined') window.nextendajax = 0;
+            window.nextendajax++;
+            dojo.addClass(this.hidden.parentNode, 'nextend-ajax-active');
             var orig = [];
             if(this.value == this.origvalue){
                 orig = dojo.clone(this.form.data);
@@ -61,10 +64,13 @@
         load: function(response){
             this.panel.innerHTML = response.html;
             eval(response.scripts);
+            dojo.removeClass(this.hidden.parentNode, 'nextend-ajax-active');
+            window.nextendajax--;
         },
         
         error: function(){
-            console.log('error');
+            window.nextendajax--;
+            alert('There was an error with the AJAX call. Please refresh the page!');
         }
     });
 })(ndojo);

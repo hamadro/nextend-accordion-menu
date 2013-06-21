@@ -51,6 +51,11 @@
         },
 
         hideOverlay: function(e) {
+            if(typeof window.nextendajax != 'undefined' && window.nextendajax > 0){
+                dojo.stopEvent(e);
+                alert('Please wait while processing AJAX call!');
+                return;
+            }
             if (e) {
                 if (window.nextendwindow) return;
                 window.nextendwindow = true;

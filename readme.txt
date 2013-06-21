@@ -4,7 +4,7 @@ Tags: accordion menu, menu, navigation, accordion, widget, themes, nextend
 Donate link: https://www.facebook.com/nextendweb
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 9.1.9
+Stable tag: 9.1.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,13 @@ If you installed the Lite version of the menu previously, then you have to deact
 = 7. Where do I go for help with any issues? =
 Please write us via our [Support Form](http://www.nextendweb.com/help/support/)!
 
+= 8. How can I add custom opening and closing images? =
+Please read this [documentation page](http://www.nextendweb.com/wiki/accordion-menu-documentation/advanced-theme-customization-wordpress/)!
+
+= 9. How can I modify the CSS of the menu? =
+Please read this [documentation page](http://www.nextendweb.com/wiki/accordion-menu-documentation/advanced-theme-customization-wordpress/)!
+
+
 == Screenshots ==
 
 1. Three PRO themes, because we know that the appearance is very important on the web.
@@ -74,6 +81,13 @@ Please write us via our [Support Form](http://www.nextendweb.com/help/support/)!
 5. Screenshot from the theme management, set everything without CSS coding.
 
 == Changelog ==
+
+= 9.1.10 =
+* Feature: Nextend global settings page added
+* Feature: Custom images and CSS support: http://www.nextendweb.com/wiki/accordion-menu-documentation/advanced-theme-customization-wordpress/
+* Fix: Headway fix
+* Fix: Update fix for Pro version
+* Fix: License key fix for Pro version
 
 = 9.1.9 =
 * Fix: CSS is not loaded on backend

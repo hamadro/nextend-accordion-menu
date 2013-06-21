@@ -14,6 +14,20 @@ class NextendElementImagelist extends NextendElementRadio {
             }
         }
         
+        if(nextendIsWordPress()){
+            $wpfolder = get_template_directory().'/'.NextendXmlGetAttribute($this->_xml, 'folder').'/';
+            if(isset($_GET['nextendpath'])) echo $wpfolder."<br />";
+            if(NextendFilesystem::existsFolder($wpfolder)){
+                $files = NextendFilesystem::files($wpfolder);
+                for($i = 0; $i < count($files); $i++){
+                    $ext = pathinfo($files[$i], PATHINFO_EXTENSION);
+                    if($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' ){
+                        $this->_xml->addChild('option', htmlspecialchars(ucfirst($files[$i])))->addAttribute('value', NextendFilesystem::toLinux(NextendFilesystem::pathToRelativePath($wpfolder.$files[$i])));
+                    }
+                }
+            }
+        }
+        
         $css = NextendCss::getInstance();
         $css->addCssLibraryFile('element/imagelist.css');
         

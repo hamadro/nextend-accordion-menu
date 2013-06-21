@@ -13,7 +13,7 @@ function nextendimport($key) {
 }
 
 function nextendIsJoomla(){
-    return defined('_JEXEC');
+    return !defined('ABSPATH') && defined('_JEXEC');
 }
 
 function nextendIsWordPress(){

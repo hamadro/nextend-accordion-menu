@@ -86,6 +86,7 @@ div .nextend-button-css:visited{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#dcdcdc',GradientType=0 ); /* IE6-9 */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#dcdcdc',GradientType=0 ); /* IE6-9 */
     border-radius: 3px;
+    text-decoration: none;
 }
 
 div .nextend-button-css:HOVER{

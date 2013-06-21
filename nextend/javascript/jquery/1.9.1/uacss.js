@@ -1,5 +1,4 @@
-  // {{{ win-safari hacks, scratch this,
-  // let's just expose platform/browser to css
+
   (function($)
   {
     var uaMatch = '', prefix = '';
@@ -17,7 +16,6 @@
       $('html').addClass('x-x11');
     }
 
-    // browser
     if (navigator.userAgent.match(/Chrome/))
     {
       uaMatch = ' Chrome/';
@@ -38,22 +36,16 @@
       uaMatch = ' MSIE ';
       prefix = 'x-msie';
     }
-    // add result prefix as browser class
     if (prefix)
     {
       $('html').addClass(prefix);
 
-      // get major and minor versions
-      // reduce, reuse, recycle
       uaMatch = new RegExp(uaMatch+'(\\d+)\.(\\d+)');
       var uaMatch = navigator.userAgent.match(uaMatch);
       if (uaMatch && uaMatch[1])
       {
-        // set major only version
         $('html').addClass(prefix+'-'+uaMatch[1]);
-        // set major + minor versions
         $('html').addClass(prefix+'-'+uaMatch[1]+'-'+uaMatch[2]);
       }
     }
   })(jQuery);
-  // }}}

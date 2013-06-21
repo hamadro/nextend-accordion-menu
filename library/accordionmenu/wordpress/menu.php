@@ -62,6 +62,17 @@ class NextendMenuWordpress extends NextendMenu {
         $class = new $class();
         $this->_themePath = $class->getPath();
     }
+    
+    function addCSS(){
+        parent::addCSS();
+        $css = NextendCss::getInstance();
+        end($css->_cssFiles);
+        $last = key($css->_cssFiles);
+        $override = str_replace(WP_PLUGIN_DIR, get_template_directory(), $css->_cssFiles[$last][1]);
+        if(NextendFilesystem::fileexists($override)){
+            $css->_cssFiles[$last][1] = $override;
+        }
+    }
 
     function getTitle() {
         return get_the_title($this->_widget['instance']['accordionmenu']);

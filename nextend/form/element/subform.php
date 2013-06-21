@@ -82,6 +82,7 @@ class NextendElementSubform extends NextendElementList {
         $html.= '</div>';
             
         $html.= '<a id="'.$this->_id.'nextend-'.$this->_name.'-button" class="nextend-configurator-button" href="#">Configure</a>';
+        $html.= '<div class="nextend-ajax"></div>';
         $html.= '</div>';
         return $html;
     }
