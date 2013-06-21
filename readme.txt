@@ -47,28 +47,31 @@ Accordion menu used widely in navigation, sliding, minimizing and maximizing con
 = 1. How do I add the menu to my site? =
 You can add via the widget control panel or by shortcode.
 
-= 2. Why should I upgrade to PRO version? =
+= 2. What should I do when the CSS are not loaded? Just a bulleted list appear. =
+Try to update the plugin. If you have the latest version go to the Accordion Menu/settings panel and switch the Safe mode on. If still no result, contact us!
+
+= 3. Why should I upgrade to PRO version? =
 The PRO version contains 3 new themes with 50 predefinied skins, also a ton of new options and features for the themes. Also includes personal support because we know if you have problem with a menu you need a solution as soon as possible.
 
-= 3. Can I customize the colors of the accordion menu? =
+= 4. Can I customize the colors of the accordion menu? =
 Yes of course. Choose from a range of skins or create a new, then customize your menu's design without requiring HTML or CSS knowledge. Change colors, shapes, backgrounds, positions, icons and more...
 
-= 4. Can I customize the fonts of the accordion menu? =
+= 5. Can I customize the fonts of the accordion menu? =
 Yes for every level and for every state. (hover, active, opened) The menu comes with Google Web Font support, allowing you to pick from over a dozen font families. To make using Google Fonts even easier, we have created a font manager interface that simplifies the process and preview it.
 
-= 5. Can I show multiple instances of accordion menu on one page? =
+= 6. Can I show multiple instances of accordion menu on one page? =
 Yes you can use multiple accordion menu widgets and accordion menu shortcodes.
 
-= 6. How to upgrade to Pro version of the accordion menu? =
+= 7. How to upgrade to Pro version of the accordion menu? =
 If you installed the Lite version of the menu previously, then you have to deactivete and delete it, then install the PRO menu version! Our system keep your previosly created menus. 
 
-= 7. Where do I go for help with any issues? =
+= 8. Where do I go for help with any issues? =
 Please write us via our [Support Form](http://www.nextendweb.com/help/support/)!
 
-= 8. How can I add custom opening and closing images? =
+= 9. How can I add custom opening and closing images? =
 Please read this [documentation page](http://www.nextendweb.com/wiki/accordion-menu-documentation/advanced-theme-customization-wordpress/)!
 
-= 9. How can I modify the CSS of the menu? =
+= 10. How can I modify the CSS of the menu? =
 Please read this [documentation page](http://www.nextendweb.com/wiki/accordion-menu-documentation/advanced-theme-customization-wordpress/)!
 
 
