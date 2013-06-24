@@ -81,6 +81,7 @@ class NextendTreeWordpress extends NextendTreebaseWordpress {
             if ( $menu_item->current ) {
                 $active = new stdClass();
                 $active->id = $menu_item->ID;
+                $active->parent = $menu_item->menu_item_parent;
                 $this->active = $active;
                 break;
             }

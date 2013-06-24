@@ -58,11 +58,13 @@ class NextendTreebase {
                 $this->active->id
             );
             $el = $this->active;
-            while ($i > 0) {
+            while (true) {
                 if (!isset($this->allItems[$i]))
                     break;
                 $el = $this->allItems[$i];
                 $i = $el->parent;
+                if (in_array($i, $stack))
+                    break;
                 $stack[] = $i;
             }
             $c = count($stack);
