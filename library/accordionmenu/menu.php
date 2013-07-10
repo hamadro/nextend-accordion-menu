@@ -37,7 +37,7 @@ class NextendMenu {
             foreach($this->_error AS $error){
                 echo $error."<br />";
             }
-            return fale;
+            return false;
         }
 
         $this->_tree = $this->getTreeInstance();
@@ -59,6 +59,8 @@ class NextendMenu {
         }
         $this->addCSS();
         $this->addJs();
+        unset($this->_tree);
+        unset($this->_data);
     }
     
     function addJs() {
@@ -77,6 +79,9 @@ class NextendMenu {
         $js->addLibraryJsLibraryFile('dojo', 'dojo/uacss.js');
         $js->addLibraryJsFile('dojo', (defined('NEXTEND_ACCORDION_MENU_ASSETS') ? NEXTEND_ACCORDION_MENU_ASSETS : NEXTENDLIBRARYASSETS) . 'accordionmenu' . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . 'accordionmenu.js');
         $animation = explode('|*|',$data->get('animation', '500|*|dojo.fx.easing.cubicInOut|*|dojo.fx.easing.cubicInOut'));
+        
+        $tooltip = NextendParse::parse($data->get('tooltip', '0|*|Click to open!|*|Click to close!'));
+        
         $js->addLibraryJs('dojo', "
             dojo.query('.noscript').removeClass('noscript');
             new AccordionMenu({
@@ -90,7 +95,10 @@ class NextendMenu {
                 easing:  '" . $animation[1] . "',
                 closeeasing:  '" . $animation[2] . "',
                 accordionmode:  " . intval($data->get('accordionmode', 1)) . ",
-                usecookies: ". ($data->get('opened', 0) == 3 ? 1 : 0) ."
+                usecookies: ". ($data->get('opened', 0) == 3 ? 1 : 0) .",
+                tooltip:  " . intval($tooltip[0]) . ",
+                tooltipopen:  '" . $tooltip[1] . "',
+                tooltipclose:  '" . $tooltip[2] . "'
             });
         ");
     }
@@ -111,7 +119,8 @@ class NextendMenu {
         if($css3animation){
             nextendimport('nextend.animation.animation');
             $animation = explode('|*|',$data->get('animation', '500|*|dojo.fx.easing.cubicInOut|*|dojo.fx.easing.cubicInOut'));
-            $context['animationinterval'] = round($animation[0]/1000,2).'s';
+            if($animation[0] < 1) $animation[0] = 1;
+            $context['animationinterval'] = number_format(round($animation[0]/1000,2),2,'.','').'s';
             $context['animationopening'] = NextendAnimation::dojoEasingToCSSEasing($animation[1]);
             $context['animationclosing'] = NextendAnimation::dojoEasingToCSSEasing($animation[2]);
             $context['animationclosing'] = NextendAnimation::dojoEasingToCSSEasing($animation[2]);

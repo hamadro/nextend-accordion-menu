@@ -45,6 +45,11 @@
             <param type="text" label="End level" style="width:50px;" />
             <param type="onoff" label="Improved start level handling" />
         </param>
+        <param name="tooltip" type="mixed" label="Tooltip" default="0|*|Click to open!|*|Click to close!" description="When mouse over an openable or closeable element, it will show a caption to the visitor.">
+            <param type="onoff" label="Enabled" />
+            <param type="text" label="Open" />
+            <param type="text" label="Close" />
+        </param>
     </params>
     <params name="animation" label="Animation parameters">
         <param name="animationskins" type="mixed" default="" label="Animation type" description="Choose one of our pre-defined animation skin or create a new. The CSS3 and the transform animations are very special and not supported by all browser!">

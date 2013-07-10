@@ -47,6 +47,11 @@
                 el.i = i;
                 if (dojo.hasClass(this.dds[i], 'opened')) {
                     this.opened = i;
+                    if(this.tooltip){
+                        dojo.attr(this.dts[i], 'title', this.tooltipclose);
+                    }
+                }else if(this.tooltip){
+                    dojo.attr(this.dts[i], 'title', this.tooltipopen);
                 }
                 if (!dojo.hasClass(el, 'forceopened')) {
                     if (this.mode == 'both') {
@@ -71,7 +76,10 @@
                     classPattern: this.classPattern,
                     accordionmode: this.accordionmode,
                     css3animation: this.css3animation,
-                    usecookies: this.usecookies
+                    usecookies: this.usecookies,
+                    tooltip: this.tooltip,
+                    tooltipopen:  this.tooltipopen,
+                    tooltipclose:  this.tooltipclose
                 });
             }, this);
             if (this.forceopened) {
@@ -273,6 +281,11 @@
                     expires: 1
                 });
             }
+            
+            if(this.tooltip){
+                dojo.attr(dt, 'title', this.tooltipclose);
+            }
+            
             this.onEnd();
         },
 
@@ -294,6 +307,11 @@
                     expires: -1
                 });
             }
+            
+            if(this.tooltip){
+                dojo.attr(dt, 'title', this.tooltipopen);
+            }
+            
             this.onEnd();
         },
 
