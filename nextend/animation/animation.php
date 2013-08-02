@@ -2,7 +2,7 @@
 
 class NextendAnimation {
     
-    function dojoEasingToCSSEasing($easing) {
+    static function dojoEasingToCSSEasing($easing) {
 
         switch ($easing) {
             case "dojo.fx.easing.linear":

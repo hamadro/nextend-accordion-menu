@@ -99,7 +99,7 @@ class NextendCache{
     }
     
     function createHash(){
-        $hash = '';
+        $hash = NextendUri::getBaseUri();
         for($i = 0; $i < count($this->_files); $i++){
             $hash.=$this->_files[$i].filemtime($this->_files[$i]);
         }

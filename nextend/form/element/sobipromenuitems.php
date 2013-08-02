@@ -38,7 +38,7 @@ class NextendElementSobipromenuitems extends NextendElementList {
         $optgroup->addAttribute('label', 'Categories');
         if (count($options)) {
             foreach ($options AS $option) {
-                $optgroup->addChild('option', $option->treename)->addAttribute('value', $option->id);
+                $optgroup->addChild('option', htmlspecialchars($option->treename))->addAttribute('value', $option->id);
             }
         }
         $this->_value = $this->_form->get($this->_name, $this->_default);
