@@ -74,3 +74,7 @@
 .nextend-textalign .nextend-radio-option.selected div{
     background-position: center -8px;
 }
+
+.nextend-textalign .nextend-radio-option:HOVER{
+    background-position: 0 -20px;
+}

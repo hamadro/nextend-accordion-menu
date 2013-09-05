@@ -3,7 +3,11 @@
 #nextend-type-panel,
 #nextend-type-panels,
 #nextend-theme-panel,
-#nextend-theme-panels{
+#nextend-theme-panels,
+#nextend-fonts-panel,
+#nextend-fonts-panels,
+#nextend-source-panel,
+#nextend-source-panels{
   margin: 0;
   padding: 0;
 }
@@ -126,6 +130,7 @@
   border-radius: 3px;  
   -moz-border-radius: 3px; 
   -webkit-border-radius: 3px;
+  width: auto;
 }
 
 .nextend-form input:focus,

@@ -13,7 +13,7 @@
             else
                 this.alpha = false;
 
-            jQuery(this.hidden).spectrum({
+            njQuery(this.hidden).spectrum({
                 showAlpha: this.alpha,
                 preferredFormat: (this.alpha == 1 ? "hex8" : "hex6"),
                 showInput: false,
@@ -29,7 +29,7 @@
                     this.hidden.value = this.hidden.value.substring(1);
                 if (this.hidden.value != this.value) {
                     this.value = this.hidden.value;
-                    jQuery(this.hidden).spectrum("set", this.value);
+                    njQuery(this.hidden).spectrum("set", this.value);
                 }
             }
         },

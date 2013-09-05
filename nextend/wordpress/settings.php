@@ -80,7 +80,7 @@ function nextend_settings_page() {
                   }
                 ?>
                 
-                <div id="nextend-configurator-save" onclick="jQuery('#nextend-settings').submit();" class="nextend-window-save"><div class="NextendWindowSave">SAVE</div></div>
+                <div id="nextend-configurator-save" onclick="njQuery('#nextend-settings').submit();" class="nextend-window-save"><div class="NextendWindowSave">SAVE</div></div>
             </div>
             <?php
             

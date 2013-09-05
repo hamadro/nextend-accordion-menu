@@ -5,6 +5,8 @@ class NextendElementList extends NextendElementHidden {
     
     var $_tooltip = true;
     
+    var $_translateable = false;
+    
     function fetchElement() {
         
         $js = NextendJavascript::getInstance();
@@ -16,6 +18,8 @@ class NextendElementList extends NextendElementHidden {
             $this->_values = array();
         }
         $this->_multiple = intval(NextendXmlGetAttribute($this->_xml, 'multiple'));
+        
+        $this->_translateable = intval(NextendXmlGetAttribute($this->_xml, 'translateable'));
         
         $size = NextendXmlGetAttribute($this->_xml, 'size');
         if($size != '') $size = " size='".$size."'";
@@ -47,7 +51,7 @@ class NextendElementList extends NextendElementHidden {
         $html = '';
         foreach($xml->optgroup AS $optgroup){
             $label = NextendXmlGetAttribute($optgroup, 'label');
-            $html.="<optgroup label='".$label."'>";
+            $html.="<optgroup label='".NextendText::_($label)."'>";
             $html.= $this->generateOptions($optgroup);
             $html.="</optgroup>";
         }
@@ -58,7 +62,7 @@ class NextendElementList extends NextendElementHidden {
         $html = '';
         foreach($xml->option AS $option){
             $v = NextendXmlGetAttribute($option, 'value');
-            $html.= '<option value="'.$v.'" '.$this->isSelected($v).'>'.((string)$option).'</option>';
+            $html.= '<option value="'.$v.'" '.$this->isSelected($v).'>' .($this->_translateable ? NextendText::_((string)$option) : ((string)$option)).'</option>';
         }
         return $html;
     }

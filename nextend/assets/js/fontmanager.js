@@ -64,7 +64,7 @@
             dojo.connect(this.textshadow, 'change', this, 'changeTextshadow');
             
             this.backgroundcolor = dojo.byId('nextend-fontmanager-backgroundcolor');
-            jQuery(this.backgroundcolor).spectrum({
+            njQuery(this.backgroundcolor).spectrum({
                 showAlpha: this.alpha,
                 preferredFormat: "hex6",
                 showInput: true,
@@ -74,7 +74,7 @@
             dojo.style(this.backgroundcolor, 'display', 'none');
         },
         
-        show: function(tabs, value){
+        show: function(tabs, translatedTabs, value){
             this.tabsnode.innerHTML = '';
             this.tabs = [];
             try{
@@ -85,7 +85,7 @@
             this.currentTab = 0;
             for(var i = 0; i < tabs.length; i++){
                 var selected = (i == this.currentTab ? ' selected' : '');
-                var tab = dojo.create('div', {'class': 'nextend-tab'+selected, 'innerHTML': tabs[i], 'value': tabs[i]}, this.tabsnode);
+                var tab = dojo.create('div', {'class': 'nextend-tab'+selected, 'innerHTML': translatedTabs[i], 'value': tabs[i]}, this.tabsnode);
                 dojo.connect(tab, 'click', dojo.hitch(this, 'changeTab', i));
                 this.tabs.push(tab);
                 if(typeof this.data[tabs[i]] == 'undefined') this.data[tabs[i]] = {};

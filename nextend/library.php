@@ -9,31 +9,40 @@ function nextendimport($key) {
 
     $keys = explode('.', $key);
     array_shift($keys);
-    require_once (NEXTENDLIBRARY . implode(DIRECTORY_SEPARATOR, $keys) . '.php');
+    require_once(NEXTENDLIBRARY . implode(DIRECTORY_SEPARATOR, $keys) . '.php');
 }
 
-function nextendIsJoomla(){
+function nextendimportpath($file) {
+    $file .= '.php';
+    if (NextendFilesystem::fileexists($file)){
+        require_once($file);
+        return true;
+    }
+    return false;
+}
+
+function nextendIsJoomla() {
     return !defined('ABSPATH') && defined('_JEXEC');
 }
 
-function nextendIsWordPress(){
+function nextendIsWordPress() {
     return defined('ABSPATH');
 }
 
-function nextendIsMagento(){
+function nextendIsMagento() {
     return class_exists('Mage');
 }
 
 nextendimport('nextend.configuration');
 
-if(nextendIsJoomla()){
+if (nextendIsJoomla()) {
     nextendimport('nextend.joomla');
-}else if(nextendIsWordPress()){
+} else if (nextendIsWordPress()) {
     nextendimport('nextend.wordpress');
-}else if(nextendIsMagento()){
+} else if (nextendIsMagento()) {
     nextendimport('nextend.magento');
 }
-if(!defined('NEXTENDLIBRARYASSETS')) define('NEXTENDLIBRARYASSETS', NEXTENDLIBRARY . 'assets' . DIRECTORY_SEPARATOR);
+if (!defined('NEXTENDLIBRARYASSETS')) define('NEXTENDLIBRARYASSETS', NEXTENDLIBRARY . 'assets' . DIRECTORY_SEPARATOR);
 nextendimport('nextend.language.language');
 nextendimport('nextend.uri.uri');
 nextendimport('nextend.filesystem.filesystem');

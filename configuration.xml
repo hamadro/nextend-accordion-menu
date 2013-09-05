@@ -1,60 +1,60 @@
-<root>
-    <params name="basic" label="Basic parameters">
-        <param name="type"  type="menutype" label="Type" default="joomla" file="type.xml" description="Choose the source component for the menu. Click on the SETTINGS button for more options." />
-        <param name="theme" type="menutheme" label="Theme" default="clean" file="theme.xml" description="Change the look of your menu. Click on the SETTINGS button for more options." />
-        <param name="moduleshowtitle" type="onoff" default="0" label="Title theme" description="If enabled, the menu theme will skin your module title. To prevent duplicated title, switch off the module Show title option." />
-        <param name="parentlink" type="onoff" default="0" label="Parent items as link" description="If enabled, the items which have subitems will be urls." />
-        <param name="accordionmode" type="radio" default="1" label="Accordion mode" description="&lt;b&gt;Normal&lt;/b&gt;: If one item opens, the others are closing on that level.&lt;br&gt;&lt;b&gt;Improved&lt;/b&gt;: Same as normal, except the animated level moving upwards to the active item.&lt;br&gt;&lt;b&gt; Multiple opening&lt;/b&gt;:The items are openable&amp;closeable independent from each other.">
-            <option value="1">Normal</option>
-            <option value="2">Improved</option>
-            <option value="0">Multiple opening</option>
+<root translate="1">
+    <params name="basic" label="AM_Basic_parameters">
+        <param name="type" translateable="1"  type="menutype" label="AM_Type" default="joomla" file="type.xml" description="AM_Choose_the_source_compon__" />
+        <param name="theme" translateable="1" type="menutheme" label="AM_Theme" default="clean" file="theme.xml" description="AM_Change_the_look__" />
+        <param name="moduleshowtitle" type="onoff" default="0" label="AM_Title_theme" description="AM_If_enabled_the_menu__" />
+        <param name="parentlink" type="onoff" default="0" label="AM_Parent_items_as_link" description="AM_If_enabled_the_items__" />
+        <param name="accordionmode" type="radio" default="1" label="AM_Accordion_mode" description="AM_bNormalb_If_one_item_opens__">
+            <option value="1">AM_Normal</option>
+            <option value="2">AM_Improved</option>
+            <option value="0">AM_Multiple_opening</option>
         </param>
-        <param name="mode" type="radio" label="Activator event" default="onclick" description="&lt;b&gt;Click&lt;/b&gt;: Open/close by mouse click action&lt;br&gt;&lt;b&gt;Mouse enter&lt;/b&gt;: Open by mouse over, close by click&lt;br&gt;&lt;b&gt;Both&lt;/b&gt;: Open and close by mouse click or enter and close by click">
-            <option value="onclick">Click</option>
-            <option value="onmouseenter">Mouse enter</option>
-            <option value="both">Both</option>
+        <param name="mode" type="radio" label="AM_Activator_event" default="onclick" description="AM_bClickb_Openclose_by_mouse__">
+            <option value="onclick">AM_Click</option>
+            <option value="onmouseenter">AM_Mouse_enter</option>
+            <option value="both">AM_Both</option>
         </param>
     </params>
-    <params name="advanced" label="Advanced parameters">
-        <param name="active" type="radio" default="1" label="Active" description="The current page is active highlighted. You can &lt;b&gt;disable&lt;/b&gt;, mark active only the current page(&lt;b&gt;item&lt;/b&gt;) or mark the current page and it's parents (&lt;b&gt;branch&lt;/b&gt;).">
-            <option value="0">Disabled</option>
-            <option value="1">Item</option>
-            <option value="2">Branch</option>
+    <params name="advanced" label="AM_Advanced_parameters">
+        <param name="active" type="radio" default="1" label="AM_Active" description="AM_The_current_page_is_active__">
+            <option value="0">AM_Disabled</option>
+            <option value="1">AM_Item</option>
+            <option value="2">AM_Branch</option>
         </param>
-        <param name="opened" type="radio" default="2" label="Opened" description="The active page can be opened on pageload by the following options.">
-            <option value="0">Disabled</option>
-            <option value="-1">All</option>
-            <option value="1">Active item</option>
-            <option value="2">Active branch</option>
-            <option value="3">State saving with cookies</option>
+        <param name="opened" type="radio" default="2" label="AM_Opened" description="AM_The_active_page_can_be__">
+            <option value="0">AM_Disabled</option>
+            <option value="-1">AM_All</option>
+            <option value="1">AM_Active_item</option>
+            <option value="2">AM_Active_branch</option>
+            <option value="3">AM_State_saving_with_cookies</option>
         </param>
-        <param name="openedlevels" multiple="1" type="list" size="5" default="" label="Always opened" description="If you mark a level always opened, it will be unfolded and the controls are disabled.">
-            <option value="1">#1 level</option>
-            <option value="2">#2 level</option>
-            <option value="3">#3 level</option>
-            <option value="4">#4 level</option>
-            <option value="5">#5 level</option>
-            <option value="6">#6 level</option>
-            <option value="7">#7 level</option>
-            <option value="8">#8 level</option>
-            <option value="9">#9 level</option>
-            <option value="10">#10 level</option>
+        <param name="openedlevels" translateable="1" multiple="1" type="list" size="5" default="" label="AM_Always_opened" description="AM_If_you_mark_a_level_always__">
+            <option value="1">AM_1_level</option>
+            <option value="2">AM_2_level</option>
+            <option value="3">AM_3_level</option>
+            <option value="4">AM_4_level</option>
+            <option value="5">AM_5_level</option>
+            <option value="6">AM_6_level</option>
+            <option value="7">AM_7_level</option>
+            <option value="8">AM_8_level</option>
+            <option value="9">AM_9_level</option>
+            <option value="10">AM_10_level</option>
         </param>
-        <param name="slice" type="mixed" label="Menu slice" default="0|*|0|*|0" description="You can show a specific part of the menu by this option. Improved start level is great if you leave start and end level on 0.">
-            <param type="text" label="Start level" style="width:50px;" />
-            <param type="text" label="End level" style="width:50px;" />
-            <param type="onoff" label="Improved start level handling" />
+        <param name="slice" type="mixed" label="AM_Menu_slice" default="0|*|0|*|0" description="AM_You_can_show_a_specific_part_of_the__">
+            <param type="text" label="AM_Start_level" style="width:50px;" />
+            <param type="text" label="AM_End_level" style="width:50px;" />
+            <param type="onoff" label="AM_Improved_start_level_handling" />
         </param>
-        <param name="tooltip" type="mixed" label="Tooltip" default="0|*|Click to open!|*|Click to close!" description="When mouse over an openable or closeable element, it will show a caption to the visitor.">
+        <param name="tooltip" type="mixed" label="AM_Tooltip" default="0|*|Click to open!|*|Click to close!" description="AM_When_mouse_over_an_openable_or__">
             <param type="onoff" label="Enabled" />
-            <param type="text" label="Open" />
-            <param type="text" label="Close" />
+            <param type="text" label="AM_Open" />
+            <param type="text" label="AM_Close" />
         </param>
     </params>
-    <params name="animation" label="Animation parameters">
-        <param name="animationskins" type="mixed" default="" label="Animation type" description="Choose one of our pre-defined animation skin or create a new. The CSS3 and the transform animations are very special and not supported by all browser!">
-            <param type="skin" label="Animation type">
-                <off label="Off - reset">
+    <params name="animation" label="AM_Animation_parameters">
+        <param name="animationskins" type="mixed" default="" label="AM_Animation_type" description="AM_Choose_one_of_our_predefined_animation__">
+            <param type="skin" label="AM_Animation_type" translateable="1">
+                <off label="AM_Off__reset">
                     <transform>0</transform>
                     <transformperspective>0</transformperspective>
                     <transformorigin>center|*|center|*|0</transformorigin>
@@ -62,7 +62,7 @@
                     <transformscale>1.0|*|1.0|*|1.0</transformscale>
                     <transformrotate>0|*|0|*|0</transformrotate>
                 </off>                
-                <accordion label="Accordion (default)">
+                <accordion label="AM_Accordion_default">
                     <animation>600|*|dojo.fx.easing.cubicInOut|*|dojo.fx.easing.cubicInOut</animation>
                     <snaptobottom>0</snaptobottom>
                     <css3animation>1</css3animation>
@@ -73,7 +73,7 @@
                     <transformscale>1.0|*|1.0|*|1.0</transformscale>
                     <transformrotate>0|*|0|*|0</transformrotate>
                 </accordion>                
-                <accordionopacity label="Accordion with opacity">
+                <accordionopacity label="AM_Accordion_with_opacity">
                     <animation>600|*|dojo.fx.easing.cubicInOut|*|dojo.fx.easing.cubicInOut</animation>
                     <snaptobottom>0</snaptobottom>
                     <css3animation>1</css3animation>
@@ -85,7 +85,7 @@
                     <transformscale>1.0|*|1.0|*|1.0</transformscale>
                     <transformrotate>0|*|0|*|0</transformrotate>
                 </accordionopacity>
-                <fliptop label="Flip top">
+                <fliptop label="AM_Flip_top">
                     <animation>600|*|dojo.fx.easing.cubicInOut|*|dojo.fx.easing.cubicInOut</animation>
                     <snaptobottom>0</snaptobottom>
                     <css3animation>1</css3animation>
@@ -97,7 +97,7 @@
                     <transformscale>1.0|*|1.0|*|1.0</transformscale>
                     <transformrotate>90|*|0|*|0</transformrotate>
                 </fliptop>
-                <flipleft label="Flip left">
+                <flipleft label="AM_Flip_left">
                     <snaptobottom>1</snaptobottom>
                     <css3animation>1</css3animation>
                     <transform>1</transform>                    
@@ -108,7 +108,7 @@
                     <transformscale>1.0|*|1.0|*|1.0</transformscale>
                     <transformrotate>0|*|90|*|0</transformrotate>
                 </flipleft>
-                <scaleup label="Scale up">
+                <scaleup label="AM_Scale_up">
                     <snaptobottom>0</snaptobottom>
                     <css3animation>1</css3animation>
                     <transform>1</transform>
@@ -119,7 +119,7 @@
                     <transformscale>0|*|0|*|0</transformscale>
                     <transformrotate>-90|*|0|*|0</transformrotate>
                 </scaleup>                
-                <translateleft label="Translate left">
+                <translateleft label="AM_Translate_left">
                     <snaptobottom>0</snaptobottom>
                     <css3animation>1</css3animation>
                     <transform>1</transform>
@@ -130,7 +130,7 @@
                     <transformscale>1|*|1|*|1</transformscale>
                     <transformrotate>0|*|0|*|0</transformrotate>
                 </translateleft>
-                <transleteright label="Translate right">
+                <transleteright label="AM_Translate_right">
                     <snaptobottom>0</snaptobottom>
                     <css3animation>1</css3animation>
                     <transform>1</transform>
@@ -141,7 +141,7 @@
                     <transformscale>1|*|1|*|1</transformscale>
                     <transformrotate>0|*|0|*|0</transformrotate>
                 </transleteright>
-                <transleteZ label="Translate Z and rotate">
+                <transleteZ label="AM_Translate_Z_and_rotate">
                     <snaptobottom>0</snaptobottom>
                     <css3animation>1</css3animation>
                     <transform>1</transform>
@@ -152,7 +152,7 @@
                     <transformscale>1|*|1|*|1</transformscale>
                     <transformrotate>30|*|0|*|0</transformrotate>
                 </transleteZ>
-                <flipdown label="Flip down">
+                <flipdown label="AM_Flip_down">
                     <snaptobottom>0</snaptobottom>
                     <css3animation>1</css3animation>
                     <transform>1</transform>
@@ -165,57 +165,56 @@
                 </flipdown>
             </param>
         </param>
-        <param name="animation" type="mixed" label="Animation" description="Set the duration of the animation and the opening and closing easing. Bounces are not available for CSS3 animations." default="500|*|dojo.fx.easing.cubicInOut|*|dojo.fx.easing.cubicInOut">
-            <param type="text" style="width: 50px;" label="Duration" description="">
+        <param name="animation" type="mixed" label="AM_Animation" description="AM_Set_the_duration_of_the_anima__" default="500|*|dojo.fx.easing.cubicInOut|*|dojo.fx.easing.cubicInOut">
+            <param type="text" style="width: 50px;" label="AM_Duration">
                 <unit value="ms">ms</unit>
             </param>
-            <param type="easing" label="Open easing" description="" />
-            <param type="easing" label="Close easing" description="" />
+            <param type="easing" label="AM_Open_easing" />
+            <param type="easing" label="AM_Close_easing" />
         </param>
-        <param name="snaptobottom" type="onoff" default="0" label="Snap submenus to bottom" description="Attaches the sublevel to the bottom, results interesting effect. Give it a try!" />
-        <param name="css3animation" type="onoff" default="0" label="CSS3 animations" description="This enables the CSS3 transition for animations if the browser support it. If not, the default javascript animation used." />
-        <param name="transform" type="onoff" default="0" label="Transform" description="With this parameter you turn on and off the CSS transform, the 6 parameter below doesn't work without this parameter. You have to turn on this parameter for the following parameters: Opacity, Perspective, Origin, Translate, Scale and Rotate." />
-        <param name="opacity" type="text" default="1.0" style="width:40px;" label="Opacity" description="You can set a value between 0 and 1 which determine the fading of the menu during the animation." />
-        <param name="transformperspective" type="text" style="width:40px;" label="Perspective" default="0" description="The perspective property defines how many pixels a 3D element is placed from the view. This property allows you to change the perspective on how 3D elements are viewed.">
+        <param name="snaptobottom" type="onoff" default="0" label="AM_Snap_submenus_to_bottom" description="AM_Attaches_the_sublev__" />
+        <param name="css3animation" type="onoff" default="0" label="AM_CSS3_animations" description="AM_This_enables_the_CSS3_transition__" />
+        <param name="transform" type="onoff" default="0" label="AM_Transform" description="AM_With_this_parameter_you_turn_on_and_off_the_CSS_transform__" />
+        <param name="opacity" type="text" default="1.0" style="width:40px;" label="AM_Opacity" description="AM_You_can_set_a_value_between__" />
+        <param name="transformperspective" type="text" style="width:40px;" label="AM_Perspective" default="0" description="AM_The_perspective_property_defines__">
             <unit>px</unit>
         </param>
-        <param name="transformorigin" type="mixed" label="Origin" default="center|*|center|*|0" description="The transform-origin property allows you to change the position on transformed elements.
-2D transformed element can change the x- and y-axis of the element. 3D transformed element can also change the z-axis of the element.">
-            <param type="text" label="X" style="width:70px;" />
-            <param type="text" label="Y" style="width:70px;" />
-            <param type="text" label="Z" style="width:70px;" />
+        <param name="transformorigin" type="mixed" label="AM_Origin" default="center|*|center|*|0" description="AM_The_transformorigin_property_allows__">
+            <param type="text" label="AM_X" style="width:70px;" />
+            <param type="text" label="AM_Y" style="width:70px;" />
+            <param type="text" label="AM_Z" style="width:70px;" />
         </param>
-        <param name="transformtranslate" type="mixed" label="Translate" default="0|*|0|*|0" description="Moves an element sideways or up and down.">
-            <param type="text" label="X" style="width:40px;">
+        <param name="transformtranslate" type="mixed" label="AM_Translate" default="0|*|0|*|0" description="AM_Moves_an_element_sideways__">
+            <param type="text" label="AM_X" style="width:40px;">
                 <unit>px</unit>
             </param>
-            <param type="text" label="Y" style="width:40px;">
+            <param type="text" label="AM_Y" style="width:40px;">
                 <unit>px</unit>
             </param>
-            <param type="text" label="Z" style="width:40px;">
+            <param type="text" label="AM_Z" style="width:40px;">
                 <unit>px</unit>
             </param>
         </param>
-        <param name="transformscale" type="mixed" label="Scale" default="1.0|*|1.0|*|1.0" description="The scale increases or decreases the size of element.">
-            <param type="text" label="X" style="width:40px;"/>
-            <param type="text" label="Y" style="width:40px;"/>
-            <param type="text" label="Z" style="width:40px;"/>
+        <param name="transformscale" type="mixed" label="AM_Scale" default="1.0|*|1.0|*|1.0" description="AM_The_scale_increases_or__">
+            <param type="text" label="AM_X" style="width:40px;"/>
+            <param type="text" label="AM_Y" style="width:40px;"/>
+            <param type="text" label="AM_Z" style="width:40px;"/>
         </param>
-        <param name="transformrotate" type="mixed" label="Rotate" default="0|*|0|*|0" description="Rotates clockwise from current position.">
-            <param type="text" label="X" style="width:40px;">
+        <param name="transformrotate" type="mixed" label="AM_Rotate" default="0|*|0|*|0" description="AM_Rotates_clockwise_from_current_position">
+            <param type="text" label="AM_X" style="width:40px;">
                 <unit>deg</unit>
             </param>
-            <param type="text" label="Y" style="width:40px;">
+            <param type="text" label="AM_Y" style="width:40px;">
                 <unit>deg</unit>
             </param>
-            <param type="text" label="Z" style="width:40px;">
+            <param type="text" label="AM_Z" style="width:40px;">
                 <unit>deg</unit>
             </param>
         </param>
     </params>
-    <params name="other" label="Other parameters">
-        <param name="class_sfx" type="text" default="" label="Menu class suffix" description="Add a CSS class to the menu" />
-        <param name="html5" type="onoff" default="0" label="HTML5 mode" description="Use NAV HTML5 tag to show the navigation for Google" />
-        <param name="noscript" type="onoff" default="1" label="Show expanded when Javascript disabled" description="Set this OFF to prevent flickering." />
+    <params name="other" label="AM_Other_parameters">
+        <param name="class_sfx" type="text" default="" label="AM_Menu_class_suffix" description="AM_Add_a_CSS_class_to_the_menu" />
+        <param name="html5" type="onoff" default="0" label="AM_HTML5_mode" description="AM_Use_NAV_HTML5_tag_to_show_the__" />
+        <param name="noscript" type="onoff" default="1" label="AM_Show_expanded_when_Javascript_disabled" description="AM_Set_this_OFF_to_prevent_flickering" />
     </params>
 </root>

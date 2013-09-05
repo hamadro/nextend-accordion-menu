@@ -6,7 +6,7 @@ class NextendElementImagelist extends NextendElementRadio {
     function fetchElement() {
         $this->setfolder();
         $files = NextendFilesystem::files($this->_folder);
-        $this->_xml->addChild('option', 'No image')->addAttribute('value', -1);
+        $this->_xml->addChild('option', NextendText::_('No_image'))->addAttribute('value', -1);
         for($i = 0; $i < count($files); $i++){
             $ext = pathinfo($files[$i], PATHINFO_EXTENSION);
             if($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' ){

@@ -1,42 +1,42 @@
 <?php
 nextendimport('nextend.form.element.list');
+NextendText::l('easing');
 
 class NextendElementEasing extends NextendElementList {
     
     function fetchElement() {
-
         $easings = array(
             "dojo.fx.easing.linear" => "Linear",
-            "dojo.fx.easing.quadIn" => "Quad In",
-            "dojo.fx.easing.quadOut" => "Quad Out",
-            "dojo.fx.easing.quadInOut" => "Quad In Out",
-            "dojo.fx.easing.cubicIn" => "Cubic In",
-            "dojo.fx.easing.cubicOut" => "Cubic Out",
-            "dojo.fx.easing.cubicInOut" => "Cubic In Out",
-            "dojo.fx.easing.quartIn" => "Quart In",
-            "dojo.fx.easing.quartOut" => "Quart Out",
-            "dojo.fx.easing.quartInOut" => "Quart In Out",
-            "dojo.fx.easing.quintIn" => "Quint In",
-            "dojo.fx.easing.quintOut" => "Quint Out",
-            "dojo.fx.easing.quintInOut" => "Quint In Out",
-            "dojo.fx.easing.sineIn" => "Sine In",
-            "dojo.fx.easing.sineOut" => "Sine Out",
-            "dojo.fx.easing.sineInOut" => "Sine In Out",
-            "dojo.fx.easing.expoIn" => "Expo In",
-            "dojo.fx.easing.expoOut" => "Expo Out",
-            "dojo.fx.easing.expoInOut" => "Expo In Out",
-            "dojo.fx.easing.circIn" => "Circ In",
-            "dojo.fx.easing.circOut" => "Circ Out",
-            "dojo.fx.easing.circInOut" => "Circ In Out",
-            "dojo.fx.easing.backIn" => "Back In",
-            "dojo.fx.easing.backOut" => "Back Out",
-            "dojo.fx.easing.backInOut" => "Back In Out",
-            "dojo.fx.easing.bounceIn" => "Bounce In",
-            "dojo.fx.easing.bounceOut" => "Bounce Out",
-            "dojo.fx.easing.bounceInOut" => "Bounce In Out"
+            "dojo.fx.easing.quadIn" => "Quad_In",
+            "dojo.fx.easing.quadOut" => "Quad_Out",
+            "dojo.fx.easing.quadInOut" => "Quad_In_Out",
+            "dojo.fx.easing.cubicIn" => "Cubic_In",
+            "dojo.fx.easing.cubicOut" => "Cubic_Out",
+            "dojo.fx.easing.cubicInOut" => "Cubic_In_Out",
+            "dojo.fx.easing.quartIn" => "Quart_In",
+            "dojo.fx.easing.quartOut" => "Quart_Out",
+            "dojo.fx.easing.quartInOut" => "Quart_In_Out",
+            "dojo.fx.easing.quintIn" => "Quint_In",
+            "dojo.fx.easing.quintOut" => "Quint_Out",
+            "dojo.fx.easing.quintInOut" => "Quint_In_Out",
+            "dojo.fx.easing.sineIn" => "Sine_In",
+            "dojo.fx.easing.sineOut" => "Sine_Out",
+            "dojo.fx.easing.sineInOut" => "Sine_In_Out",
+            "dojo.fx.easing.expoIn" => "Expo_In",
+            "dojo.fx.easing.expoOut" => "Expo_Out",
+            "dojo.fx.easing.expoInOut" => "Expo_In_Out",
+            "dojo.fx.easing.circIn" => "Circ_In",
+            "dojo.fx.easing.circOut" => "Circ_Out",
+            "dojo.fx.easing.circInOut" => "Circ_In_Out",
+            "dojo.fx.easing.backIn" => "Back_In",
+            "dojo.fx.easing.backOut" => "Back_Out",
+            "dojo.fx.easing.backInOut" => "Back_In_Out",
+            "dojo.fx.easing.bounceIn" => "Bounce_In",
+            "dojo.fx.easing.bounceOut" => "Bounce_Out",
+            "dojo.fx.easing.bounceInOut" => "Bounce_In_Out"
         );
         foreach($easings as $k => $easing) {
-            $this->_xml->addChild('option', ucfirst($easing))->addAttribute('value', $k);
+            $this->_xml->addChild('option', NextendText::_($easing))->addAttribute('value', $k);
         }
         return parent::fetchElement();
     }

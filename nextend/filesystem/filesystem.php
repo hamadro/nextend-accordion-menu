@@ -62,6 +62,11 @@ class NextendFilesystemAbstract {
         $i = NextendFilesystem::getInstance();
         return str_replace($i->_basepath, '', str_replace('/', DIRECTORY_SEPARATOR, $path));
     }
+
+    static function pathToAbsolutePath($path) {
+        $i = NextendFilesystem::getInstance();
+        return $i->_basepath.str_replace('/', DIRECTORY_SEPARATOR, $path);
+    }
     
     static function absoluteURLToPath($url) {
         $i = NextendFilesystem::getInstance();

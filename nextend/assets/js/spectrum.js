@@ -1764,4 +1764,4 @@
         }
     });
 
-})(window, jQuery);
+})(window, njQuery);

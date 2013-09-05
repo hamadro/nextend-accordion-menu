@@ -19,7 +19,7 @@ class NextendElementColor extends NextendElement {
         $this->_value = $this->_form->get($this->_name, $this->_default);
         $hidden = new NextendElementText($this->_form, $this->_tab, $this->_xml);
         $html = "<div class='nextend-color' style='".NextendXmlGetAttribute($this->_xml, 'style')."'>";
-        $hiddenhtml = $hidden->render($this->control_name);
+        $hiddenhtml = $hidden->render($this->control_name, false);
         $html.= $hiddenhtml[1];
         $html.= "</div>";
         

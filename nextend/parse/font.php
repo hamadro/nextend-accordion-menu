@@ -12,10 +12,12 @@ class NextendParseFont{
     
     function printTab($tab = ''){
         if($tab == '') $tab = $this->_font['firsttab'];
-        $tab = &$this->_font[$tab];
         $style = '';
-        foreach($tab AS $k => $v){
-            $style.= $this->parse($k, $v);
+        if(isset($this->_font[$tab])){
+            $tab = &$this->_font[$tab];
+            foreach($tab AS $k => $v){
+                $style.= $this->parse($k, $v);
+            }
         }
         return $style;
     }

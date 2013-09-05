@@ -1,34 +1,28 @@
 <?php
+
 nextendimport('nextend.language.language');
 
 class NextendElement {
-    
+
     var $_form;
-    
     var $_tab;
-    
     var $_xml;
-    
     var $_default;
-    
     var $_name;
-    
     var $_label;
-    
     var $_description;
-    
     var $_id;
-    
     var $_inputname;
-    
+    var $_editableName = false;
+
     function NextendElement(&$form, &$tab, &$xml) {
 
         $this->_form = $form;
         $this->_tab = $tab;
         $this->_xml = $xml;
     }
-    
-    function render($control_name = 'params') {
+
+    function render($control_name = 'params', $tooltip = true) {
         $this->control_name = $control_name;
         $this->_default = NextendXmlGetAttribute($this->_xml, 'default');
         $this->_name = NextendXmlGetAttribute($this->_xml, 'name');
@@ -36,34 +30,38 @@ class NextendElement {
         $this->_inputname = $control_name . '[' . $this->_name . ']';
         $this->_label = NextendXmlGetAttribute($this->_xml, 'label');
         $this->_description = NextendXmlGetAttribute($this->_xml, 'description');
-        if ($this->_label == '') $this->_label = $this->_name;
+        if ($this->_label == '')
+            $this->_label = $this->_name;
         return array(
-            $this->fetchTooltip() ,
+            $tooltip ? $this->fetchTooltip() : '',
             $this->fetchElement()
         );
     }
-    
+
     function fetchTooltip() {
-        if($this->_label == '-') $this->_label = '';
-        $output = '<label id="' . $this->_id . '-lbl" for="' . $this->_id . '"';
-        if ($this->_description) {
-            $output.= ' class="hasTip" title="' . NextendText::_($this->_label) . '::' . NextendText::_($this->_description) . '">';
+        if ($this->_label == '-')
+            $this->_label = '';
+        $output = '<label id="' . $this->_id . '-lbl" for="' . $this->_id . '">';
+        if ($this->_editableName) {
+            $element = new SimpleXMLElement('<param type="text" label="' . NextendText::_($this->_label) . '" default="**label**" name="' . $this->_name . 'customlabel" />');
+            $customlabel = new NextendElementText($this->_form, $this, $element);
+            $h = $customlabel->render($this->control_name);
+            $output.= $h[1];
         } else {
-            $output.= '>';
+            $output.= NextendText::_($this->_label);
         }
-        $output.= NextendText::_($this->_label) . '</label>';
-        return $output;
+        return $output . '</label>';
     }
-    
+
     function fetchNoTooltip() {
 
         return "";
     }
-    
-    function fetchElement() {
 
+    function fetchElement() {
+        
     }
-    
+
     function generateId($name) {
 
         return str_replace(array(
@@ -72,12 +70,13 @@ class NextendElement {
             ']',
             '-x-',
             ' '
-        ) , array(
+                ), array(
             '-x-',
             '',
             '',
             '[x]',
             ''
-        ) , $name);
+                ), $name);
     }
+
 }

@@ -35,13 +35,13 @@
             var data = {
                 orig: orig,
                 control_name: this.form.control_name,
-                xml: this.form.xml,
+                xml: (typeof this.xml === 'undefined' ? this.form.xml : this.xml),
                 tab: this.tab,
                 name: this.name,
                 value: this.hidden.value,
                 loadedJSS: this.form.loadedJSS,
                 loadedCSS: this.form.loadedCSS
-            }; 
+            };
             var d = {};
             d.data = dojo.toJson(data);
             if(typeof this.form.extra != 'undefined'){

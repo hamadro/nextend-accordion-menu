@@ -16,10 +16,10 @@ class NextendElementText extends NextendElement {
         ');
         $html = "";
         $html.= "<div class='nextend-text' style='".NextendXmlGetAttribute($this->_xml, 'style')."'>";
-        $html.= "<input id='" . $this->_id . "' name='" . $this->_inputname . "' value='" . $this->_form->get($this->_name, $this->_default) . "' type='text'  autocomplete='off' />";
+        $html.= "<input id='" . $this->_id . "' name='" . $this->_inputname . "' value='" . htmlspecialchars($this->_form->get($this->_name, $this->_default), ENT_QUOTES) . "' type='text'  autocomplete='off' />";
         if ($this->_xml->unit) {
             $html.= "<div class='nextend-text-unit'>";
-            $html.= (string)$this->_xml->unit;
+            $html.= NextendText::_((string)$this->_xml->unit);
             $html.= "</div>";
         }
         $html.= "</div>";

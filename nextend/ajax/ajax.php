@@ -1,4 +1,5 @@
 <?php
+nextendimport('nextend.environment.request');
 
 class NextendAjax {
 
@@ -8,6 +9,12 @@ class NextendAjax {
         switch ($_REQUEST['mode']) {
             case 'subform':
                 $this->subform();
+                break;
+            case 'auth':
+                $this->auth();
+                break;
+            case 'pluginmethod':
+                $this->pluginmethod();
                 break;
             default:
                 break;
@@ -62,10 +69,49 @@ class NextendAjax {
         exit;
     }
 
+    function auth() {
+        $folder = NextendRequest::getVar('folder');
+        if ($folder) {
+            $authfile = NextendFilesystem::pathToAbsolutePath($folder) . 'auth.php';
+            if (NextendFilesystem::fileexists($authfile)) {
+                require_once $authfile;
+                if (function_exists('nextend_api_auth_flow')) {
+                    nextend_api_auth_flow();
+                }
+            }
+        }
+
+        exit;
+    }
+
+    function pluginmethod() {
+        $group = NextendRequest::getCmd('group', null);
+        $method = NextendRequest::getCmd('method', null);
+        if($group && $method){
+            JPluginHelper::importPlugin($group);
+            $dispatcher = JDispatcher::getInstance();
+            $data = null;
+            $results = $dispatcher->trigger($method, array(&$data));
+        }
+        echo json_encode($data);
+        exit;
+    }
+
 }
 
 if (isset($_REQUEST['nextendajax'])) {
-    $ajax = new NextendAjax();
-    $ajax->parseRequest();
+    if (nextendIsJoomla()) {
+        $app = JFactory::getApplication();
+        if ($app->isAdmin()){
+            $ajax = new NextendAjax();
+            $ajax->parseRequest();
+        }else{
+            echo "This function only available in backend!";
+            exit;
+        }
+    }else{
+        $ajax = new NextendAjax();
+        $ajax->parseRequest();
+    }
 }
 ?>

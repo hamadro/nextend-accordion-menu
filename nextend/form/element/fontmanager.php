@@ -4,6 +4,8 @@ nextendimport('nextend.fonts.fontmanager');
 
 class NextendElementFontmanager extends NextendElement {
     
+    var $_includeJS = true;
+    
     function fetchElement() {
 
         $css = NextendCss::getInstance();
@@ -23,19 +25,23 @@ class NextendElementFontmanager extends NextendElement {
         
         $html.= $fontmanager->render();
         
-        $html.= '<a id="nextend-'.$this->_name.'-button" class="nextend-font-button" href="#">Font</a>';
-        $html.= '<a id="nextend-'.$this->_name.'-button-export" class="nextend-button-css nextend-font-export nextend-element-hastip" title="Export" href="#"></a>';
-        $html.= '<a id="nextend-'.$this->_name.'-button-import" class="nextend-button-css nextend-font-import nextend-element-hastip" title="Import" href="#"></a>';
+        $html.= '<a id="nextend-'.$this->_name.'-button" class="nextend-font-button" href="#">'.NextendText::_('Font').'</a>';
+        $html.= '<a id="nextend-'.$this->_name.'-button-export" class="nextend-button-css nextend-font-export nextend-element-hastip" title="'.NextendText::_('FONTMANAGER_Export').'" href="#"></a>';
+        $html.= '<a id="nextend-'.$this->_name.'-button-import" class="nextend-button-css nextend-font-import nextend-element-hastip" title="'.NextendText::_('FONTMANAGER_Import').'" href="#"></a>';
         $html.= '<div id="nextend-'.$this->_name.'-message" class="nextend-message"></div>';
         
         $html.= "<div class='nextend-fontmanager clearfix'>";
-        $hiddenhtml = $hidden->render($this->control_name);
+        $hiddenhtml = $hidden->render($this->control_name, false);
         $html.= $hiddenhtml[1];
         $html.= "</div>";
         
         $tabs = explode('|', NextendXmlGetAttribute($this->_xml, 'tabs'));
+        $translatedTabs = array();
+        for($i = 0; $i < count($tabs); $i++ ){
+            $translatedTabs[$i] = NextendText::_($tabs[$i]);
+        }
         
-        $js->addLibraryJs('dojo', '
+        $this->printjs = '
             new NextendElementFontmanager({
                 hidden: "'.$this->_id.'",
                 button: "nextend-'.$this->_name.'-button",
@@ -43,9 +49,17 @@ class NextendElementFontmanager extends NextendElement {
                 exportbtn: "nextend-'.$this->_name.'-button-export",
                 message: "nextend-'.$this->_name.'-message",
                 tabs: '.json_encode($tabs).',
-                firsttab: "'.$tabs[0].'"
+                translatedTabs: '.json_encode($translatedTabs).',
+                firsttab: "'.$tabs[0].'",
+                txt: {
+                    importingdone: "'.NextendText::_('FONTMANAGER_Importing_done').'",
+                    youcanimport: "'.NextendText::_('FONTMANAGER_Now_you_can_import_the_settings_of_this_font').'"
+                }
             });
-        ');
+        ';
+        if($this->_includeJS){
+            $js->addLibraryJs('dojo', $this->printjs);
+        }
         return $html;
     }
 }

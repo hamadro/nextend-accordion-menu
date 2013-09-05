@@ -16,6 +16,6 @@ class NextendElementHidden extends NextendElement {
     
     function fetchElement() {
 
-        return "<input id='" . $this->_id . "' name='" . $this->_inputname . "' value='" . $this->_form->get($this->_name, $this->_default) . "' type='".$this->_mode."' autocomplete='off' />";
+        return "<input id='" . $this->_id . "' name='" . $this->_inputname . "' value='" . htmlspecialchars($this->_form->get($this->_name, $this->_default), ENT_QUOTES) . "' type='".$this->_mode."' autocomplete='off' />";
     }
 }

@@ -20,7 +20,7 @@
         
         showFontmanager: function(){
             this.fontmanager.firsttab = this.firsttab;
-            this.fontmanager.show(this.tabs, this.hidden.value);
+            this.fontmanager.show(this.tabs, this.translatedTabs, this.hidden.value);
             this.fontmanager.onSave = dojo.hitch(this,'save');
         },
         
@@ -34,7 +34,7 @@
             if(typeof window.fontmanagercopy != 'undefined'){
                 this.hidden.value = window.fontmanagercopy;
                 this.fireEvent(this.hidden, 'change');
-                this.changeMessage('Importing done...');
+                this.changeMessage(this.txt.importingdone);
             }else{
                 dojo.attr(this.hidden, 'type', 'text');
                 this.hidden.focus();
@@ -44,7 +44,7 @@
         
         doExport: function(){
             window.fontmanagercopy = this.hidden.value;
-            this.changeMessage('Now you can import the settings of this font!');
+            this.changeMessage(this.txt.youcanimport);
             var importbuttons = dojo.query('.nextend-font-import');
             for(var i = 0; i < importbuttons.length; i++){
                 dojo.style(importbuttons[i], 'visibility', 'visible');

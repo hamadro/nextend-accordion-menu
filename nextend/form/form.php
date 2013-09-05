@@ -8,17 +8,21 @@ class NextendForm extends NextendData {
     
     var $_xml;
     
+    var $_xmlfile;
+    
     var $_tabs;
     
     function NextendForm() {
         $this->_xml = null;
         $this->_tabs = array();
+        NextendText::l('form');
+        NextendText::l('unit');
         parent::NextendData();
         $this->loadQtip();
         
     }
     
-    function loadQtip(){
+    static function loadQtip(){
         global $nextendqtip;
         if($nextendqtip) return;
         $nextendqtip = true;
@@ -56,7 +60,7 @@ class NextendForm extends NextendData {
     }
     
     function initTabs() {
-        if (count($this->_tabs) == 0) {
+        if (count($this->_tabs) == 0 && $this->_xml->params && count($this->_xml->params)) {
             foreach($this->_xml->params as $tab) {
                 $type = NextendXmlGetAttribute($tab, 'type');
                 if($type == '') $type = 'default';
@@ -95,7 +99,12 @@ class NextendForm extends NextendData {
     function loadXMLFile($file) {
         
         $this->_xml = simplexml_load_file($file);
+        $this->_xmlfile = $file;
+        $this->_xmlfolder = dirname($file).'/';
         $this->_root = dirname($file).DIRECTORY_SEPARATOR;
+        if(NextendXmlGetAttribute($this->_xml, 'translate')){
+            NextendText::l(basename($file, ".xml"), $this->_xmlfolder.'languages/');
+        }
     }
     
     function setXML(&$xml) {

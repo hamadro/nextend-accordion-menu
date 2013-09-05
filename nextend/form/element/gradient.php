@@ -24,7 +24,7 @@ class NextendElementGradient extends NextendElement {
         $onoffXml = new SimpleXMLElement('<param type="onoff" default="'.$gradient[0].'" name="'.$attr->name . '_onoff'.'" />');
         $onoff = new NextendElementOnoff($this->_form, $this->_tab, $onoffXml);
         
-        $onoffHtml = $onoff->render($this->control_name);
+        $onoffHtml = $onoff->render($this->control_name, false);
         $html.= $onoffHtml[1];
         $html.= "</td>";
         $html.= "<td class='nextend-gradient-start'>";
@@ -32,7 +32,7 @@ class NextendElementGradient extends NextendElement {
         $startColorXml = new SimpleXMLElement('<param type="color" default="'.$gradient[1].'" name="'.$attr->name . '_start'.'" />');
         $startColor = new NextendElementColor($this->_form, $this->_tab, $startColorXml);
         
-        $startColorHtml = $startColor->render($this->control_name);
+        $startColorHtml = $startColor->render($this->control_name, false);
         $html.= $startColorHtml[1];
         $html.= "</td>";
         $html.= "<td class='nextend-grandient-bg'>";
@@ -42,12 +42,12 @@ class NextendElementGradient extends NextendElement {
         $endColorXml = new SimpleXMLElement('<param type="color" default="'.$gradient[2].'" name="'.$attr->name . '_end'.'" />');
         $endColor = new NextendElementColor($this->_form, $this->_tab, $endColorXml);
         
-        $endColorHtml = $endColor->render($this->control_name);
+        $endColorHtml = $endColor->render($this->control_name, false);
         $html.= $endColorHtml[1];
         $html.= "</td>";
         $html.= "</tr></table>";
         $hidden = new NextendElementHidden($this->_form, $this->_tab, $this->_xml);
-        $hiddenhtml = $hidden->render($this->control_name);
+        $hiddenhtml = $hidden->render($this->control_name, false);
         $html.= $hiddenhtml[1];
         $html.= "</div>";
         $alpha = NextendXmlGetAttribute($this->_xml, 'alpha');

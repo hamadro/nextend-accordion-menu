@@ -21,13 +21,13 @@ class NextendElementSwitcher extends NextendElement {
         foreach($this->_xml->unit AS $unit) {
             $this->_values[] = (string)$unit->attributes()->value;
             $html.= "<span class='nextend-switcher-units-unit'>";
-            $html.= (string)$unit;
+            $html.= NextendText::_((string)$unit);
             $html.= "</span>";
         }
         $html.= "</div>";
         $this->_value = $this->_form->get($this->_name, $this->_default);
         $hidden = new NextendElementHidden($this->_form, $this->_tab, $this->_xml);
-        $hiddenhtml = $hidden->render($this->control_name);
+        $hiddenhtml = $hidden->render($this->control_name, false);
         $html.= $hiddenhtml[1];
         $html.= "</div>";
         $js->addLibraryJs('dojo', '

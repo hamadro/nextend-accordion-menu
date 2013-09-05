@@ -122,7 +122,9 @@ class NextendTreeWordpress extends NextendTreebaseWordpress {
         if (!$this->_config['parentlink'] && $item->p) {
             $item->nname = '<a>' . $item->nname . '</a>';
         } else {
-            $item->nname = '<a target="'.$item->target.'" href="' . $item->url . '">' . $item->nname . '</a>';
+            $target = '';
+            if(!empty($item->target)) $target =  'target="'.$item->target.'"';
+            $item->nname = '<a '.$target.' href="' . $item->url . '">' . $item->nname . '</a>';
         }
     }
 

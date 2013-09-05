@@ -48,20 +48,19 @@ class NextendAccordionMenuWidget extends WP_Widget {
     }
 
     function widget($args, $instance) {
-        extract($args, EXTR_SKIP);
 
-        echo $before_widget;
-        $title = empty($instance['title']) ? ' ' : apply_filters('widget_title', $instance['title']);
+        $title = apply_filters( 'widget_title', $instance['title'] );
 
-        if (!empty($title))
-            echo $before_title . $title . $after_title;
+    		echo $args['before_widget'];
+    		if ( ! empty( $title ) )
+    			echo $args['before_title'] . $title . $args['after_title'];
 
         require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'accordionmenu'. DIRECTORY_SEPARATOR . 'wordpress' . DIRECTORY_SEPARATOR . 'menu.php' );
 
         $menu = new NextendMenuWordpress($args, $instance, dirname(__FILE__));
         $menu->render();
 
-        echo $after_widget;
+        echo $args['after_widget'];
     }
 
 }

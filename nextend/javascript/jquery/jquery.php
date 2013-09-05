@@ -17,12 +17,14 @@ class NextendJavascriptjQuery {
         static $instance;
         if (!is_object($instance)) {
             $instance = new NextendJavascriptjQuery();
+            $instance->addJsLibraryFile('njQuery.js');
             if(nextendIsWordPress()){
                 wp_enqueue_script('jquery');
             }else{
                 $instance->addJsLibraryFile('jQuery.js');
             }
             $instance->addJsLibraryFile('uacss.js');
+            $instance->addJsLibraryFile('jquery.unique-element-id.js');
         }
         return $instance;
     }
@@ -47,6 +49,14 @@ class NextendJavascriptjQuery {
             $this->_jsFiles[] = $file;
         }
     }
+    
+    
+    function removeJsFile($file) {
+
+        if(($key = array_search($file, $this->_jsFiles)) !== false) {
+            unset($this->_jsFiles[$key]);
+        }
+    }
 
     /*
     * jQuery folder
@@ -56,6 +66,12 @@ class NextendJavascriptjQuery {
 
         $file = NextendFilesystem::getBasePath().NextendFilesystem::getLibraryPath() . 'javascript/jquery/1.9.1/' . $file;
         $this->addJsFile($file);
+    }
+    
+    function removeJsLibraryFile($file) {
+
+        $file = NextendFilesystem::getBasePath().NextendFilesystem::getLibraryPath() . 'javascript/jquery/1.9.1/' . $file;
+        $this->removeJsFile($file);
     }
 
     /*
@@ -89,7 +105,7 @@ class NextendJavascriptjQuery {
         $inline.= '$(document).ready(function() {';
         $inline.= $this->_js;
         $inline.= '});';
-        $inline.= ' })(jQuery);';
+        $inline.= ' })(njQuery);';
         $js->addJs($inline);
     }
 }

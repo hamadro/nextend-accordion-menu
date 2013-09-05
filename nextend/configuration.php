@@ -2,9 +2,10 @@
 global $nextend;
 
 $nextend = array(
-    'cachetime' => 900,
+    'cachetime' => 31536000,
     'cachepath' => null,
-    'gzip' => 0
+    'gzip' => 0,
+    'debuglng' => 0
 );
 
 function getNextend($prop, $default = ''){

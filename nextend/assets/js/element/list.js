@@ -6,9 +6,11 @@
             this.select = dojo.byId(this.hidden+'_select');
             this.hidden = dojo.byId(this.hidden);
             
-            dojo.connect(this.select, 'change', this, 'onSelect');
+            this.select.dojohandle = dojo.connect(this.select, 'change', this, 'onSelect');
             
             this.hidden.select = this.select;
+            
+            dojo.connect(this.hidden, 'change', this, 'reset');
             this.reset();
         },
 
@@ -25,6 +27,13 @@
                     }
                 }
                 this.fireEvent(this.hidden, 'change');
+            }
+            if(!this.multiple){
+                var selected = this.select.options[this.select.selectedIndex].value;
+                if(selected != this.hidden.value){
+                    this.hidden.value = selected;
+                    this.fireEvent(this.hidden, 'change');
+                }
             }
         },
         

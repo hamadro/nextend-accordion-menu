@@ -1,0 +1,1 @@
+window.njQuery = typeof jQuery == "undefined" ? null : jQuery;

@@ -22,11 +22,11 @@ class NextendElementSkin extends NextendElementList {
     
     function generateOptions(&$xml){
         $html = '';
-        $html.= '<option value="0" selected="selected">Choose</option>';
+        $html.= '<option value="0" selected="selected">'.NextendText::_('Choose').'</option>';
         $this->skins = array();
         foreach($this->_xml->children() as $skin) {
             $v = $skin->getName();
-            $html.= '<option value="'.$v.'">'.NextendXmlGetAttribute($skin, 'label').'</option>';
+            $html.= '<option value="'.$v.'">'.NextendText::_(NextendXmlGetAttribute($skin, 'label')).'</option>';
             $this->skins[$v] = array();
             foreach($skin as $param) {
                 $this->skins[$v][$param->getName()] = (string)$param;

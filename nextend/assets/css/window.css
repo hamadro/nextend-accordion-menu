@@ -62,6 +62,12 @@
   background-position: center 17px;
 }
 
+.smartslider .nextend-topbar-logo,
+.nextend-smart-slider-admin .nextend-topbar-logo{
+    background-image: url('../images/admin/smartslider.png');
+    background-position: center center;
+}
+
 a.nextend-topbar-button{
   display: block;
   width: 97px;
