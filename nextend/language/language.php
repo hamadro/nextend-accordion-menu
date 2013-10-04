@@ -52,7 +52,7 @@ if(getNextend('debuglng', 0)){
     
         static function _($text){
             if(isset(self::$translated['NEXTEND_'.$text])){
-                return self::$translated['NEXTEND_'.$text];
+                return '•'.self::$translated['NEXTEND_'.$text].'•';
             }else{
                 self::$untranslated['NEXTEND_'.preg_replace('/[^\da-z_]/i', '', preg_replace('/\s+/', '_', $text))] = $text;
                 return '??'.$text.'??';

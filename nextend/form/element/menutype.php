@@ -54,14 +54,14 @@ class NextendElementMenutype extends NextendElementSubform {
         nextendimport('nextend.accordionmenu.types.loadplugin');
         nextendimport('nextend.plugin.plugin');
         $this->_list = array();
-        NextendPlugin::callPlugin('nextendmenu', 'onNextendMenuList', $this->_list);
+        NextendPlugin::callPlugin('nextendmenu', 'onNextendMenuList', array(&$this->_list));
     }
 
     function loadWordpressList() {
         nextendimport('nextend.plugin.plugin');
         require_once(NEXTEND_ACCORDION_MENU . 'types' . DIRECTORY_SEPARATOR . 'loadplugin.php');
         $this->_list = array();
-        NextendPlugin::callPlugin('nextendmenu', 'onNextendMenuList', $this->_list);
+        NextendPlugin::callPlugin('nextendmenu', 'onNextendMenuList', array(&$this->_list));
     }
 
 }

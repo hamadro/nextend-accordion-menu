@@ -3,7 +3,7 @@
 Plugin Name: Nextend Accordion Menu
 Plugin URI: http://nextendweb.com/
 Description: User-friendly, highly customizable and easy to integrate menu solution to build custom accordion menus from any WordPress menu.
-Version: 9.1.19
+Version: 9.2.0
 Author: Nextend
 Author URI: http://www.nextendweb.com
 License: GPL2
@@ -25,15 +25,16 @@ License: GPL2
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 defined('NEXTENDACCORDIONMENULITE') || define('NEXTENDACCORDIONMENULITE', true);
-if (!defined('NEXTENDLIBRARY')) {
-    require_once(dirname(__FILE__).'/nextend/wp-library.php');
-}
  
 define('NEXTEND_ACCORDION_MENU', dirname(__FILE__) . DIRECTORY_SEPARATOR );
 define('NEXTEND_ACCORDION_MENU_ASSETS', NEXTEND_ACCORDION_MENU . 'library' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR );
 
 add_action( 'plugins_loaded', 'nextend_accordion_menu_load');
 function nextend_accordion_menu_load(){
+
+    if (!defined('NEXTENDLIBRARY')) {
+        require_once(dirname(__FILE__).'/nextend/wp-library.php');
+    }
     
     if(is_admin()){
         require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'admin.php');

@@ -7,10 +7,10 @@ if(is_array($nextend_config)){
     }
 }
 
-add_action('admin_menu', 'nextend_settings_add_page', 9);
+add_action('admin_menu', 'nextend_settings_add_page');
 
 function nextend_settings_add_page() {
-	add_submenu_page('edit.php?post_type=accordion_menu', 'Nextend Settings', 'Settings', 'manage_options', 'nextend_settings_page', 'nextend_settings_page');
+	add_submenu_page('options-general.php', 'Nextend Settings', 'Nextend Settings', 'manage_options', 'nextend_settings_page', 'nextend_settings_page');
 }
 
 function nextend_settings_page() {
@@ -23,7 +23,7 @@ function nextend_settings_page() {
   }
 ?>
 <div id="nextend_configuration" class="postbox" style="margin: 0 20px 0 0;">
-<form method="post" id="nextend-settings" action="<?php echo admin_url("edit.php?post_type=accordion_menu&page=nextend_settings_page"); ?>">
+<form method="post" id="nextend-settings" action="<?php echo admin_url("options-general.php?page=nextend_settings_page"); ?>">
 <?php
     
     $configurationXmlFile = NEXTENDLIBRARY.'wordpress/configuration.xml';

@@ -43,13 +43,13 @@ class NextendElementMenutheme extends NextendElementSubform {
         nextendimport('nextend.accordionmenu.themes.loadplugin');
         nextendimport('nextend.plugin.plugin');
         $this->_list = array();
-        NextendPlugin::callPlugin('nextendmenutheme', 'onNextendMenuThemeList', $this->_list);
+        NextendPlugin::callPlugin('nextendmenutheme', 'onNextendMenuThemeList', array(&$this->_list));
     }
     
     function loadWordpressList(){
         require_once(NEXTEND_ACCORDION_MENU . 'themes' . DIRECTORY_SEPARATOR . 'loadplugin.php');
         nextendimport('nextend.plugin.plugin');
         $this->_list = array();
-        NextendPlugin::callPlugin('nextendmenutheme', 'onNextendMenuThemeList', $this->_list);
+        NextendPlugin::callPlugin('nextendmenutheme', 'onNextendMenuThemeList', array(&$this->_list));
     }
 }

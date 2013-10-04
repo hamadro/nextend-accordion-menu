@@ -66,6 +66,7 @@
             eval(response.scripts);
             dojo.removeClass(this.hidden.parentNode, 'nextend-ajax-active');
             window.nextendajax--;
+            njQuery(window).trigger("resize");
         },
         
         error: function(){

@@ -1,7 +1,7 @@
 <?php
-jimport('nextend.mvc.router');
-jimport('nextend.mvc.view');
-jimport('nextend.acl.acl');
+nextendimport('nextend.mvc.router');
+nextendimport('nextend.mvc.view');
+nextendimport('nextend.acl.acl');
 
 class NextendController{
     

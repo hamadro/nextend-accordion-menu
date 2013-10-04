@@ -80,6 +80,14 @@
     background-position: center -1130px;
 }
 
+.nextend-pluginmatrix-views .nextend-pluginmatrix-view-html .nextend-border{
+    background-position: center -1190px;
+}
+
+.nextend-pluginmatrix-views .nextend-pluginmatrix-view-html.active .nextend-border{
+    background-position: center -1250px;
+}
+
 .nextend-pluginmatrix-pane{
     display: none;
 }

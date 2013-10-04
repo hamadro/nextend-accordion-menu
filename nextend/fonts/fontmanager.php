@@ -37,7 +37,7 @@ class NextendFontmanager{
         
         $id = 'nextend-fontmanager-lightbox-'.md5(time());
         
-        $html.= '<div id="'.$id.'" class="gk_hack nextend-window '.$this->_currentform->get('class','').'">';
+        $html.= '<div id="'.$id.'" class="gk_hack nextend-window '.$this->_currentform->get('class', isset($_REQUEST['view']) && $_REQUEST['view'] == 'sliders_settings' ? 'smartslider' : '').'">';
         $html.= '<div class="gk_hack nextend-window-container">';
         $html.= '<div class="gk_hack nextend-topbar"><div class="gk_hack nextend-topbar-logo"></div>';
         

@@ -15,3 +15,7 @@
 .nextend-subform.nextend-ajax-active .nextend-ajax{
   display: block;
 }
+
+.nextend-subform.heightauto > .nextend-list > select{
+    height: auto;
+}

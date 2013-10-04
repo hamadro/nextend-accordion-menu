@@ -69,18 +69,12 @@ class NextendElementPluginMatrix extends NextendElementList {
     }
     
     function getOptions(){
-        if($this->_list == null && nextendIsJoomla()){
-            $this->loadJoomlaList();
+        if($this->_list == null){
+            $this->_list = array();
+            NextendPlugin::callPlugin('nextendsliderwidget', 'onNextendSliderWidgetList', array(&$this->_list));
         }
         uasort($this->_list, array($this, 'sort'));
         return $this->_list;
-    }
-    
-    function loadJoomlaList(){
-        JPluginHelper::importPlugin( 'nextendsliderwidget' );
-        $dispatcher = JDispatcher::getInstance();
-        $this->_list = array();
-        $results = $dispatcher->trigger( 'onNextendSliderWidgetList', array(&$this->_list));
     }
 
     function sort($a, $b){

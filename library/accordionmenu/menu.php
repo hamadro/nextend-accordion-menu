@@ -44,6 +44,16 @@ class NextendMenu {
         if ($this->_tree === false) {
             return false;
         }
+        
+        $this->_render();
+        
+        $this->addCSS();
+        $this->addJs();
+        unset($this->_tree);
+        unset($this->_data);
+    }
+    
+    function _render(){
         $this->_tree->generateItems();
         $id = $this->getId();
         $data = & $this->_data;
@@ -57,10 +67,6 @@ class NextendMenu {
         if($html5){
             echo "</nav>";
         }
-        $this->addCSS();
-        $this->addJs();
-        unset($this->_tree);
-        unset($this->_data);
     }
     
     function addJs() {

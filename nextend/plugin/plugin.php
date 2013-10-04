@@ -1,6 +1,6 @@
 <?php
 
-class NextendPlugin{
+class NextendPluginAbstract{
     static $classes = array();
     
     static function addPlugin($group, $class){
@@ -9,13 +9,22 @@ class NextendPlugin{
         self::$classes[$group][] = $class;
     }
     
-    static function callPlugin($group, $method, &$args = null){
+    static function callPlugin($group, $method, $args = null){
         if(isset(self::$classes[$group])){
             foreach(self::$classes[$group] AS $class){
-                call_user_func_array(array($class, $method), array(&$args));
+                call_user_func_array(array($class, $method), $args);
             }
         }
     }
-    
+}
+
+if (nextendIsJoomla()) {
+    nextendimport('nextend.plugin.joomla');
+} elseif (nextendIsWordPress()) {
+    nextendimport('nextend.plugin.wordpress');
+}elseif (nextendIsMagento()) {
+    nextendimport('nextend.plugin.magento');
+}else{
+    nextendimport('nextend.plugin.default');
 }
 ?>

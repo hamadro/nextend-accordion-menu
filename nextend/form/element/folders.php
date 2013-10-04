@@ -11,6 +11,9 @@ class NextendElementFolders extends NextendElementList {
         if($folder === 'systemimages'){
             if(nextendIsJoomla()){
                 $folder = JPATH_SITE.'/images/';
+            }else if(nextendIsWordpress()){
+                $folder = wp_upload_dir();
+                $folder = $folder['basedir'].'/';
             }
         }
         $this->addFolder($folder);

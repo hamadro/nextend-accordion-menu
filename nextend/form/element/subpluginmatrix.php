@@ -30,8 +30,8 @@ class NextendElementSubpluginmatrix extends NextendElementSubform {
     }
 
     function getOptions() {
-        if ($this->_list == null && nextendIsJoomla()) {
-            $this->loadJoomlaList();
+        if ($this->_list == null) {
+            $this->loadList();
         }
         $list = array_keys($this->_list);
         sort($list);
@@ -39,19 +39,17 @@ class NextendElementSubpluginmatrix extends NextendElementSubform {
     }
 
     function getSubFormfolder($value) {
-        if ($this->_list == null && nextendIsJoomla()) {
-            $this->loadJoomlaList();
+        if ($this->_list == null) {
+            $this->loadList();
         }
         if (!isset($this->_list[$value]))
             list($value) = array_keys($this->_list);
         return $this->_list[$value];
     }
-
-    function loadJoomlaList() {
-        JPluginHelper::importPlugin(NextendXmlGetAttribute($this->_xml, 'group'));
-        $dispatcher = JDispatcher::getInstance();
+    
+    function loadList(){
         $this->_list = array();
-        $results = $dispatcher->trigger('onNextend' . NextendXmlGetAttribute($this->_xml, 'method') . 'List', array(&$this->_list));
+        NextendPlugin::callPlugin(NextendXmlGetAttribute($this->_xml, 'group'), 'onNextend'.NextendXmlGetAttribute($this->_xml, 'method').'List', array(&$this->_list));
     }
 
 }

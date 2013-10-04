@@ -1,6 +1,8 @@
 <root>
     <params name="firstrow" type="horizontal">
-        <param name="family" label="FONTMANAGER_Family" type="text" default="Arial, Helvetica" />
+        <param name="family" label="FONTMANAGER_Family" style="width:920px;" type="text" default="Arial, Helvetica" />
+    </params>
+    <params name="secondrow" type="horizontal">
         <param name="color" label="FONTMANAGER_Color" type="color" alpha="1" default="000000FF" />
         <param name="size" label="FONTMANAGER_Size" type="mixed" default="14|*|px" translateable="0" >
             <param type="text" style="width: 22px;" />

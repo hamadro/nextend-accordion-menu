@@ -7,7 +7,7 @@ class NextendElementSubform extends NextendElementList {
 
         $css = NextendCss::getInstance();
         $css->addCssLibraryFile('element/subform.css');
-        $html = "<div class='nextend-subform' style='" . NextendXmlGetAttribute($this->_xml, 'style') . "'>";
+        $html = "<div class='nextend-subform ".NextendXmlGetAttribute($this->_xml, 'class')."' style='" . NextendXmlGetAttribute($this->_xml, 'style') . "'>";
 
         $this->_value = $this->_form->get($this->_name, $this->_default);
 

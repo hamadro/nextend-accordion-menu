@@ -46,5 +46,10 @@ if (!defined('NEXTENDLIBRARYASSETS')) define('NEXTENDLIBRARYASSETS', NEXTENDLIBR
 nextendimport('nextend.language.language');
 nextendimport('nextend.uri.uri');
 nextendimport('nextend.filesystem.filesystem');
+nextendimport('nextend.plugin.plugin');
+
+if (nextendIsWordPress()) {
+    do_action('nextend_load');
+}
 
 ?>

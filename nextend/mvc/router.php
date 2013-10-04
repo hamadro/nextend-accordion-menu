@@ -15,7 +15,7 @@ class NextendRouterAbstract{
     
     function route($query){
         if(strpos($this->_baseurl, '?') === false){
-            return $this->_baseurl.'12?'.$query;
+            return $this->_baseurl.'?'.$query;
         }
         return $this->_baseurl.'&'.$query;
     }

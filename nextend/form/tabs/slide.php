@@ -6,17 +6,17 @@ class NextendTabSlide extends NextendTab {
     function decorateTitle() {
         echo "<div class='nextend-tab'>";
         if ($this->_hidetitle != 1)
-            echo "<h3>" . NextendXmlGetAttribute($this->_xml, 'label') . "</h3>";
+            echo "<h3>" . NextendText::_(NextendXmlGetAttribute($this->_xml, 'label')) . "</h3>";
         ?>
         <div class="smartslider-advanced-layers smartslider-greybar">
             <div class="smartslider-toolbar-simple smartslider-toolbar-options smartslider-button-grey first">
-                <div>Simple</div>
+                <div><?php echo NextendText::_('Simple_mode'); ?></div>
             </div>
             <div class="smartslider-toolbar-advanced smartslider-toolbar-options smartslider-button-grey last">
-                <div>Advanced</div>
+                <div><?php echo NextendText::_('Advanced_mode'); ?></div>
             </div>
         </div>
-        <div class="smartslider-toolbar-play">PLAY</div>
+        <div class="smartslider-toolbar-play"><?php echo NextendText::_('PLAY'); ?></div>
         <div class="smartslider-slide-console"></div>
     <?php
     }

@@ -22,7 +22,11 @@ class NextendData {
     
     function toJSON() {
 
-        return json_encode($json);
+        return json_encode($this->_data);
+    }
+    
+    function toArray() {
+        return $this->_data;
     }
     
     function get($key, $default = '') {

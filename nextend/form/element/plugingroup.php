@@ -52,37 +52,17 @@ class NextendElementPlugingroup extends NextendElementSubform {
 
     function loadList() {
         if ($this->_list == null) {
-            if (nextendIsJoomla()) {
-                $this->loadJoomlaList();
-            } else if (nextendIsMagento()) {
-                $this->loadOtherList();
-            } else if (nextendIsWordpress()) {
-                $this->loadWordpressList();
+            $this->_group = array();
+            $this->_list = array();
+            NextendPlugin::callPlugin(NextendXmlGetAttribute($this->_xml, 'plugingroup'), NextendXmlGetAttribute($this->_xml, 'method'), array(&$this->_group, &$this->_list));
+            
+            $v = explode('_', $this->_value);
+            if (!isset($this->_list[$v[0]][$this->_value])) {
+                $keys = array_keys($this->_list);
+                $ks = array_keys($this->_list[$keys[0]]);
+                $this->_value = $this->_list[$keys[0]][$ks[0]];
             }
         }
-    }
-
-    function loadJoomlaList() {
-        JPluginHelper::importPlugin(NextendXmlGetAttribute($this->_xml, 'plugingroup'));
-        $dispatcher = JDispatcher::getInstance();
-        $this->_group = array();
-        $this->_list = array();
-        $results = $dispatcher->trigger(NextendXmlGetAttribute($this->_xml, 'method'), array(&$this->_group, &$this->_list));
-
-        $v = explode('_', $this->_value);
-        if (!isset($this->_list[$v[0]][$this->_value])) {
-            $keys = array_keys($this->_list);
-            $ks = array_keys($this->_list[$keys[0]]);
-            $this->_value = $this->_list[$keys[0]][$ks[0]];
-        }
-    }
-
-    function loadOtherList() {
-
-    }
-
-    function loadWordpressList() {
-
     }
 
 }

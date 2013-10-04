@@ -5,7 +5,7 @@ class NextendElementFontMatrixChooser extends NextendElementList {
     
     function fetchElement() {
     
-        nextendimport('nextend.smartslider.settings');
+        nextendimportsmartslider2('nextend.smartslider.settings');
         NextendSmartSliderFontSettings::initAdminFonts();
         
         $this->_xml->addChild('option', 'None')->addAttribute('value', '');

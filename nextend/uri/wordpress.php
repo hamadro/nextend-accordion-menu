@@ -8,4 +8,8 @@ class NextendUri extends NextendUriAbstract{
             $this->_baseuri = str_replace('http://', 'https://', $this->_baseuri);
         }
     }
+    
+    static function ajaxUri($query = ''){
+        return site_url('/wp-admin/admin-ajax.php?action='.$query);
+    }
 }
