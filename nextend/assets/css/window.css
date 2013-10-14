@@ -7,9 +7,13 @@
   background-color: RGBA(0,0,0,0.3);
   left: 0;
   top:0;
-  z-index:9900;
+  z-index:99;
   overflow:hidden;
   font-family: 'Montserrat', Arial, sans-serif;
+}
+
+#content-box .nextend-window{
+  z-index:101;
 }
 
 .nextend-window.nextend-no-style{

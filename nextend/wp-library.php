@@ -1,8 +1,9 @@
 <?php
 
-global $nextend_head;
+global $nextend_head, $nextend_body;
 
 $nextend_head = '';
+$nextend_body = '';
 
 if (!defined('NEXTENDLIBRARY')) {
     require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'library.php');
@@ -11,23 +12,55 @@ if (!defined('NEXTENDLIBRARY')) {
     
     add_action('print_footer_scripts', 'nextend_generate');
     function nextend_generate() {
-        global $nextend_head;
-        ob_start();
+        global $nextend_head, $nextend_body;
         if (class_exists('NextendCss', false) || class_exists('NextendJavascript', false)) {
-            $css = NextendCss::getInstance();
-            $css->generateCSS();
+            ob_start();
+              $css = NextendCss::getInstance();
+              $css->generateCSS();
+              echo '<script type="text/javascript">
+(function (w, d, u) {
+    if(w.njQuery === u){
+        w.bindNextendQ = [];
+    
+        function pushToReady(x) {
+            w.bindNextendQ.push([alias.handler,"ready", x]);
+        }
+        
+        function pushToLoad(x) {
+            w.bindNextendQ.push([alias.handler,"load", x]);
+        }
+
+        var alias = {
+            handler: w,
+            ready: pushToReady,
+            load: pushToLoad
+        }
+
+        w.njQuery = function (handler) {
+            alias.handler = handler;
+            return alias;
+        }
+    }
+})(window, document);
+              </script>';
+            $nextend_head = ob_get_clean();
+            
+            ob_start();
             $js = NextendJavascript::getInstance();
             $js->generateJs();
+            $nextend_body = ob_get_clean();
         }
-        $nextend_head = ob_get_clean();
-        if(getNextend('safemode', 0)) echo $nextend_head;
+        if(getNextend('safemode', 0)) echo $nextend_head.$nextend_body;
         return true;
     }
     
     function nextend_render_end($buffer){
-        global $nextend_head;
+        global $nextend_head, $nextend_body;
         if($nextend_head != ''){
-            return preg_replace('/<\/head>/', $nextend_head.'</head>', $buffer, 1);
+            $buffer = preg_replace('/<\/head>/', $nextend_head.'</head>', $buffer, 1);
+        }
+        if($nextend_body != ''){
+            $buffer = preg_replace('/<\/body>/', $nextend_body.'</body>', $buffer, 1);
         }
         return $buffer;
     }
