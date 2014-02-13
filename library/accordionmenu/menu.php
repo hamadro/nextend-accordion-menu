@@ -1,6 +1,8 @@
 <?php
 
 class NextendMenu {
+
+    var $id = 0;
     
     var $_tree;
     
@@ -15,6 +17,10 @@ class NextendMenu {
     var $_classPrefix = 'nextend-nav-';
     
     var $_error;
+    
+    var $_cachehash = '';
+    
+    var $_cachemoduleid = '';
     
     function NextendMenu($path) {
 
@@ -93,6 +99,8 @@ class NextendMenu {
             new AccordionMenu({
                 node: dojo.query('#" . $this->getId() . " dl.level1')[0],
                 instance: '" . $this->getId() . "',
+                url: '".(nextendIsJoomla() ? JUri::root(true) : '')."/',
+                moduleid: ".$this->id.",
                 classPattern: /" . $this->_classPrefix . "[0-9]+/,
                 mode: '" . $data->get('mode', 'onclick') . "', 
                 level: 1,

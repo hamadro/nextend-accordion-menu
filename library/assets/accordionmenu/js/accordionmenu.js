@@ -6,7 +6,7 @@
             this.classPattern = /nextend-nav-[0-9]+/;
             dojo.mixin(this, args);
             if (!this.node) return;
-            if (this.css3animation && !Modernizr.cssanimations) {
+            if (this.css3animation && !nModernizr.cssanimations) {
                 this.css3animation = 0;
             }
             
@@ -18,7 +18,7 @@
                     'msTransition': 'MSTransitionEnd',
                     'transition': 'transitionend'
                 };
-                this.transitionEnd = transEndEventNames[Modernizr.prefixed('transition')];
+                this.transitionEnd = transEndEventNames[nModernizr.prefixed('transition')];
             }
             if (typeof this.easing == 'string') this.easing = eval(this.easing);
             if (typeof this.closeeasing == 'string') this.closeeasing = eval(this.closeeasing);
@@ -26,6 +26,9 @@
             this.enabled = true;
             window.accordion = new Object;
             window.accordion.running = false;
+            
+            this.loaded = [];
+            
             this.init();
         },
 
@@ -38,13 +41,15 @@
                     });
                 }
             });
-
+            this.timeouts = [];
             this.opened = -1;
             this.dts = dojo.query('dt.parent.level' + this.level, this.node);
             this.dds = dojo.query('dd.parent.level' + this.level, this.node);
             this.forceopened = false;
             this.dts.forEach(function(el, i) {
                 el.i = i;
+                el.menuid = dojo.attr(el, 'data-menuid')
+                this.dds[i].i = i;
                 if (dojo.hasClass(this.dds[i], 'opened')) {
                     this.opened = i;
                     if(this.tooltip){
@@ -57,8 +62,38 @@
                     if (this.mode == 'both') {
                         dojo.connect(el, 'onclick', dojo.hitch(this, 'onOpenOrClose'));
                         dojo.connect(el, 'onmouseenter', dojo.hitch(this, 'onOpenOrClose'));
-                    } else {
+                    } else if(this.mode == 'mouseenterandleave'){
+                        dojo.connect(el, 'onmouseenter', dojo.hitch(this, function(e){
+                            var el = e.currentTarget;
+                            if(this.timeouts[el.i]) clearTimeout(this.timeouts[el.i]);
+                            this.open(el.i);
+                        }));
+                        
+                        dojo.connect(this.dds[i], 'onmouseenter', dojo.hitch(this, function(i, e){
+                            if(this.timeouts[el.i]) clearTimeout(this.timeouts[el.i]);
+                        }, i));
+                        
+                        
+                        dojo.connect(el, 'onmouseleave', dojo.hitch(this, function(e){
+                            var _this = this,
+                                el = e.currentTarget;
+                            if(this.timeouts[el.i]) clearTimeout(this.timeouts[el.i]);
+                            this.timeouts[el.i] = setTimeout(function(){
+                                _this.close(el.i);
+                            }, this.interval+1); 
+                        }));
+                        
+                        dojo.connect(this.dds[i], 'onmouseleave', dojo.hitch(this, function(i, e){
+                            var _this = this,
+                                el = e.currentTarget;
+                            if(this.timeouts[el.i]) clearTimeout(this.timeouts[el.i]);
+                            this.timeouts[el.i] = setTimeout(function(){
+                                _this.close(el.i);
+                            }, this.interval+1); 
+                        }, i));
+                    }else {
                         dojo.connect(el, this.mode, dojo.hitch(this, 'onOpenOrClose'));
+                      
                     }
                 } else {
                     this.forceopened = true;
@@ -73,6 +108,8 @@
                     interval: this.interval,
                     easing: this.easing,
                     instance: this.instance,
+                    url: this.url,
+                    moduleid: this.moduleid,
                     classPattern: this.classPattern,
                     accordionmode: this.accordionmode,
                     css3animation: this.css3animation,
@@ -81,6 +118,7 @@
                     tooltipopen:  this.tooltipopen,
                     tooltipclose:  this.tooltipclose
                 });
+                if(typeof this.dds[i].dl == 'undefined') this.dds[i].dl = dojo.query('> div', this.dds[i])[0];
             }, this);
             if (this.forceopened) {
                 this.accordionmode = 0;
@@ -113,6 +151,55 @@
         open: function(i) {
             var dt = this.dts[i];
             var dd = this.dds[i];
+            
+            
+            if(typeof dd.dl === 'undefined'){
+                if(typeof this.loaded[dt.menuid] === 'undefined'){
+                    var _this = this;
+                    this.loaded[dt.menuid] = 'loading';
+                    dojo.xhrGet({
+                        url: this.url,
+                        content: {
+                            nextendaccordionmenuajax: 1,
+                            moduleid: this.moduleid,
+                            parent: dt.menuid
+                        },
+                        load: function(html) {
+                            _this.loaded[dt.menuid] = html;
+                            dd.innerHTML = html;
+                            dd.dl = dojo.query('> dl', dd)[0];
+                            if(dd.dl){
+                                new AccordionMenu({
+                                    node: dd.dl,
+                                    level: _this.level + 1,
+                                    mode: _this.mode,
+                                    interval: _this.interval,
+                                    easing: _this.easing,
+                                    instance: _this.instance,
+                                    url: _this.url,
+                                    moduleid: _this.moduleid,
+                                    classPattern: _this.classPattern,
+                                    accordionmode: _this.accordionmode,
+                                    css3animation: _this.css3animation,
+                                    usecookies: _this.usecookies,
+                                    tooltip: _this.tooltip,
+                                    tooltipopen:  _this.tooltipopen,
+                                    tooltipclose:  _this.tooltipclose
+                                });
+                            }else{
+                                dd.dl = dojo.query('> div', dd)[0];
+                            }
+                            _this.open(i);
+                        },
+                        error: function() {
+                        }
+                    });
+                    return;
+                }else if(this.loaded[dt.menuid] === 'loading'){
+                    return;
+                }
+            }
+
             if(dojo.hasClass(dd, 'opened')) return;
             if (dd.wwanim && dd.wwanim.status() == "playing") {
                 dd.wwanim.stop();

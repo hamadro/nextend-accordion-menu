@@ -54,7 +54,8 @@ function new_accordion_menu_post_type() {
         'has_archive' => false,
         'publicly_queryable' => false,
         'exclude_from_search' => true,
-        'show_in_nav_menus' => false
+        'show_in_nav_menus' => false,
+        'menu_icon' => 'dashicons-list-view'
     );
     register_post_type('accordion_menu', $args);
 }
@@ -79,8 +80,11 @@ function new_accordion_menu_messages($messages) {
     return $messages;
 }
 
+global $wp_version;
+if (version_compare($wp_version, '3.8', 'l')) {
+    add_action( 'admin_head', 'nextend_accordion_menu_icons' );
+}
 
-add_action( 'admin_head', 'nextend_accordion_menu_icons' );
 function nextend_accordion_menu_icons() {
 ?>
     <style type="text/css" media="screen">
@@ -164,7 +168,7 @@ function nextend_configuration_box($object, $box) {
 
         require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . 'loadplugin.php');
         ?>
-        <div id="nextend-configurator-wp">
+        <div id="nextend-configurator-wp" class="accordionmenu">
             <div class="gk_hack nextend-topbar"><div class="gk_hack nextend-topbar-logo"></div>
                 <?php
                 $manual = 'http://www.nextendweb.com/wiki/accordion-menu-documentation/';
@@ -192,6 +196,8 @@ function nextend_configuration_box($object, $box) {
                 ?>
                 
                 <div id="nextend-configurator-save" onclick="jQuery('#publish').trigger('click');" class="nextend-window-save"><div class="NextendWindowSave">SAVE</div></div>
+		<div id="nextend-configurator-cancel" onclick="document.location.href='<?php echo admin_url('edit.php?post_type=accordion_menu'); ?>';"
+		class="nextend-window-cancel"><div class="NextendWindowCancel">CANCEL</div></div>
             </div>
             <?php
             

@@ -13,9 +13,15 @@ class NextendImage extends NextendCache {
         $this->_subfolder = 'image' . DIRECTORY_SEPARATOR;
         parent::NextendCache();
         $this->_filetype = 'png';
-        $time = time();
-        $currentcachetime = $time - $time % $this->_cacheTime;
-        $this->_folder = $this->_path . $this->_prename . $currentcachetime . DIRECTORY_SEPARATOR;
+        
+        if($this->_cacheTime == 'static' || $this->_cacheTime == 0){
+            $this->_folder = $this->_path . 'static' . DIRECTORY_SEPARATOR;
+            $currentcachetime = 0;
+        }else{
+            $time = time();
+            $currentcachetime = $time - $time % $this->_cacheTime;
+            $this->_folder = $this->_path . $this->_prename . $currentcachetime . DIRECTORY_SEPARATOR;
+        }
         $this->createCacheSubFolder($this->_folder, $currentcachetime);
     }
     
@@ -123,6 +129,55 @@ class NextendImage extends NextendCache {
             }
             return $this->url($url);
         }
+    }
+    
+    function resizeImage($image, $w, $h){
+        $w = intval($w);
+        $h = intval($h);
+        
+        $cachefile = $this->_folder . 'resize' . md5($image) . $w .'_'. $h . '.' . $this->_filetype;
+        if (!NextendFilesystem::existsFile($cachefile)) {
+            if($image && $w >= 1 && $h >= 1){
+                if(strpos($image, 'http') === 0){   //url
+                }else{
+                    if(!NextendFilesystem::existsFile($image)){
+                        $image = NextendFilesystem::getBasePath().$image;
+                    }
+                }
+                if(is_readable($image)){
+                    $orig = null;
+                    switch(exif_imagetype($image)){
+                        case IMAGETYPE_JPEG:
+                          $orig = imagecreatefromjpeg($image);
+                          break;
+                        case IMAGETYPE_PNG:
+                          $orig = imagecreatefrompng($image);
+                          break;
+                    }
+                    if($orig){
+                        $this->createIm($w, $h);
+                        $ow = imagesx($orig);
+                        $oh = imagesy($orig);
+                        $ratioX = $ow /$w;
+                        $ratioY = $oh /$h;
+                        if($ratioX > $ratioY){
+                            $ow = $ratioY*$w;
+                        }else{
+                            $oh = $ratioX*$h;
+                        }
+                        imagecopyresampled($this->_im, $orig, 0, 0, 0, 0, $w, $h, $ow, $oh);
+                        $this->saveIm($cachefile);
+                        imagedestroy($orig);
+                        return NextendFilesystem::pathToAbsoluteURL($cachefile);
+                    }
+                }else{
+                    return $image;
+                }
+            }else{
+                return $image;
+            }
+        }
+        return NextendFilesystem::pathToAbsoluteURL($cachefile);
     }
     
     function createIm($x, $y) {

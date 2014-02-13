@@ -68,6 +68,7 @@
     // Check for the browser's transitions support.
     support.transition = getVendorPropertyName('transition');
     support.transitionDelay = getVendorPropertyName('transitionDelay');
+    support.transitionProperty = getVendorPropertyName('transitionProperty');
     support.transform = getVendorPropertyName('transform');
     support.transformOrigin = getVendorPropertyName('transformOrigin');
     support.transform3d = checkTransform3dSupport();
@@ -79,6 +80,7 @@
         'otransitionend',
         'oTransitionEnd'
     ];
+    var transitionEnd = support.transitionEnd = eventNames[support.transition] || null;
 
     // Populate jQuery's `$.support` with the vendor prefixes we know.
     // As per [jQuery's cssHooks documentation](http://api.jquery.com/jQuery.cssHooks/),
@@ -207,15 +209,18 @@
     // Allows you to rotate, scale and translate.
     registerCssHook('scale');
     registerCssHook('translate');
+    registerCssHook('translate3d');
     registerCssHook('rotate');
     registerCssHook('rotateX');
     registerCssHook('rotateY');
+    registerCssHook('rotateZ');
     registerCssHook('rotate3d');
     registerCssHook('perspective');
     registerCssHook('skewX');
     registerCssHook('skewY');
     registerCssHook('x', true);
     registerCssHook('y', true);
+    registerCssHook('z', true);
 
     // ## Transform class
     // This is the main class of a transformation property that powers
@@ -307,6 +312,10 @@
                 this.rotateY = unit(theta, 'deg');
             },
 
+            rotateZ: function (theta) {
+                this.rotateZ = unit(theta, 'deg');
+            },
+
             // ### scale
             //
             //     .css({ scale: 9 })      //=> "scale(9,9)"
@@ -333,18 +342,22 @@
                 this.perspective = unit(dist, 'px');
             },
 
-            // ### x / y
+            // ### x / y / z
             // Translations. Notice how this keeps the other value.
             //
             //     .css({ x: 4 })       //=> "translate(4px, 0)"
             //     .css({ y: 10 })      //=> "translate(4px, 10px)"
             //
             x: function (x) {
-                this.set('translate', x, null);
+                this.set('translate', x, null, null);
             },
 
             y: function (y) {
-                this.set('translate', null, y);
+                this.set('translate', null, y, null);
+            },
+            
+            z: function(z) {
+                this.set('translate3d', null, null, z); 
             },
 
             // ### translate
@@ -353,21 +366,18 @@
             //     .css({ translate: '2, 5' })    //=> "translate(2px, 5px)"
             //
             translate: function (x, y) {
-                if (this._translateX === undefined) {
-                    this._translateX = 0;
-                }
-                if (this._translateY === undefined) {
-                    this._translateY = 0;
-                }
-
-                if (x !== null && x !== undefined) {
-                    this._translateX = unit(x, 'px');
-                }
-                if (y !== null && y !== undefined) {
-                    this._translateY = unit(y, 'px');
-                }
-
-                this.translate = this._translateX + "," + this._translateY;
+                this.set('translate3d', x, y, 0);
+            },
+        
+            translate3d: function(x, y, z) {
+                if (this._translateX === undefined) { this._translateX = 0; }
+                if (this._translateY === undefined) { this._translateY = 0; }
+                if (this._translateZ === undefined) { this._translateZ = 0; }
+    
+                if (x !== null && x !== undefined) { this._translateX = unit(x, 'px'); }
+                if (y !== null && y !== undefined) { this._translateY = unit(y, 'px'); }
+                if (z !== null && z !== undefined) { this._translateZ = unit(z, 'px'); } 
+                this.translate3d = this._translateX + "," + this._translateY + "," + this._translateZ;
             }
         },
 
@@ -378,6 +388,10 @@
 
             y: function () {
                 return this._translateY || 0;
+            },
+
+            z: function () {
+                return this._translateZ || 0;
             },
 
             scale: function () {
@@ -430,6 +444,7 @@
                     if ((!support.transform3d) && (
                         (i === 'rotateX') ||
                             (i === 'rotateY') ||
+                            (i === 'rotateZ') ||
                             (i === 'perspective') ||
                             (i === 'transformOrigin'))) {
                         continue;
@@ -439,7 +454,7 @@
                         if (use3d && (i === 'scale')) {
                             re.push(i + "3d(" + this[i] + ",1)");
                         } else if (use3d && (i === 'translate')) {
-                            re.push(i + "3d(" + this[i] + ",0)");
+                            re.push(i + "3d(" + this[i] + ")");
                         } else {
                             re.push(i + "(" + this[i] + ")");
                         }
@@ -608,9 +623,43 @@
 
         // Compute delay until callback.
         // If this becomes 0, don't bother setting the transition property.
-        var work = $.transit.enabled && support.transition;
-        var i = work ? (parseInt(duration, 10) + parseInt(delay, 10)) : 0;
+        //var work = $.transit.enabled && support.transition;
+        var i = $.transit.enabled ? (parseInt(duration, 10) + parseInt(delay, 10)) : 0;
 
+
+        if(!support.transition && i > 0){
+            var end = self.data('sstransit');
+            if(end){
+                var s = 0,
+                    e = 1;
+                if(end == 'onAnimateOutEnd'){
+                    s = 1;
+                    e = 0;
+                }
+                theseProperties.opacity = s;
+                self.css(theseProperties);     
+                var fn = function (next) {     
+                    self.stop().animate({opacity: e}, {
+                        duration: i,
+                        easing: easing,
+                        complete: function(){
+                            self.data('sstransit', null);      
+                            if (callback) {
+                                callback.apply(self);
+                            }
+                        }                 
+                    });
+                    if (next) {
+                        next();
+                    }
+                };
+    
+                callOrQueue(self, queue, fn);
+                return self;
+            }
+            i = 0;
+        }
+        
         // If there's nothing to do...
         if (i === 0) {
             var fn = function (next) {
@@ -711,7 +760,9 @@
             var properties = this.style[support.transitionProperty];
 
             if (properties) {
-                properties = properties.replace(/\s*/g, '').split(',');
+                properties = properties.replace(/-([a-z])/gi, function(s, group1) {
+				    return group1.toUpperCase();
+				}).replace(/\s*/g, '').split(',');
 
                 var style = window.getComputedStyle(this),
                     css = {};

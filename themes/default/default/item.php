@@ -5,10 +5,8 @@ if ($item->fib) {
 }
 if ($this->up) {
     while ($this->level > $item->level) {
-?>
-</dl></dd>
-<?php
-        array_pop($this->stack);
+        echo '</dl>';
+        $this->endItem(array_pop($this->stack)); //dd close
         $this->level = count($this->stack);
     }
     $this->up = false;
@@ -24,12 +22,12 @@ if (isset($this->openedlevels[$this->level]) && $item->p) $classes[] = 'opened f
 if ($item->fib) $classes[] = 'first';
 if ($item->lib) $classes[] = 'last';
 $classes = implode(' ', $classes);
-if ($item->fib):
+
+if ($item->fib){
 ?>
 <dl class="level<?php echo $this->level." ".$item->classes ?>">
-<?php
-endif; ?>
-  <dt class="<?php echo $classes ?>">
+<?php } ?>
+  <dt class="<?php echo $classes ?>" data-menuid="<?php echo $item->id; ?>">
     <span class="outer">
       <span class="inner">
         <?php echo $item->nname; ?>
@@ -37,16 +35,19 @@ endif; ?>
     </span>
   </dt>
   <dd class="<?php echo $classes ?>">
-    <?php echo $content; ?>
-    <?php if ($item->p):
-    $this->renderItem();
-else: ?>
-  </dd>
-  <?php
-endif; ?>
-<?php
-if ($item->lib):
+  <?php 
+if ($item->lib){
     $this->up = true;
-?>
-<?php
-endif; ?>
+}
+
+if(!$this->renderCached || $item->opened){
+    if($this->ajax) ob_start();
+    echo $content;
+    if ($item->p){
+        $this->renderItem();
+    }else{ 
+        $this->endItem($item); //dd close
+    }
+}else if($this->ajax){
+    for($this->pointer; isset($this->items[$this->pointer]) && $this->items[$this->pointer]->level > $item->level;$this->pointer++);
+}

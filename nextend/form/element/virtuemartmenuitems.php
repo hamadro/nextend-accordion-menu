@@ -8,11 +8,14 @@ class NextendElementVirtuemartmenuitems extends NextendElementList {
         static $vmversion = 0;
         
         if($vmversion === 0){
-            if (class_exists('VmConfig') || file_exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_virtuemart' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'config.php')) {
+            require_once(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_virtuemart' . DIRECTORY_SEPARATOR . 'version.php');
+            $VMVERSION = new vmVersion();
+            $version = property_exists($VMVERSION, 'RELEASE') && isset($VMVERSION->RELEASE) ? $VMVERSION->RELEASE : vmVersion::$RELEASE;
+            if (version_compare($version, '2.0.0', 'ge') ) {
                 $vmversion = 2;
                 require_once(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_virtuemart' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'config.php');
                 VmConfig::loadConfig();
-            }else if(file_exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_virtuemart' . DIRECTORY_SEPARATOR . 'compat.joomla1.5.php')){
+            }else{
                 $vmversion = 1;
             }
         }

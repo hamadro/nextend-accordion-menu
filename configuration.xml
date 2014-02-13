@@ -1,4 +1,4 @@
-<root translate="1">
+<root translate="accordionmenu">
     <params name="basic" label="AM_Basic_parameters">
         <param name="type" translateable="1"  type="menutype" label="AM_Type" default="joomla" file="type.xml" description="AM_Choose_the_source_compon__" />
         <param name="theme" translateable="1" type="menutheme" label="AM_Theme" default="clean" file="theme.xml" description="AM_Change_the_look__" />
@@ -12,7 +12,8 @@
         <param name="mode" type="radio" label="AM_Activator_event" default="onclick" description="AM_bClickb_Openclose_by_mouse__">
             <option value="onclick">AM_Click</option>
             <option value="onmouseenter">AM_Mouse_enter</option>
-            <option value="both">AM_Both</option>
+            <option value="both">Click + Mouse enter</option>
+            <option value="mouseenterandleave">Mouse enter + leave</option>
         </param>
     </params>
     <params name="advanced" label="AM_Advanced_parameters">

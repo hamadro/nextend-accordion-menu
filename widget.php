@@ -25,6 +25,7 @@ class NextendAccordionMenuWidget extends WP_Widget {
                     <?php
                     $accordionmenu = $instance['accordionmenu'];
                     $menus = new WP_Query(array(
+                        'posts_per_page' => 1000,
                         'post_type' => 'accordion_menu'
                     ));
                     foreach ($menus->posts AS $menu) {

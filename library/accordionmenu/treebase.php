@@ -1,5 +1,7 @@
 <?php
 
+nextendimport('nextend.cache.data.data');
+
 class NextendTreebase {
 
     var $_template;
@@ -17,21 +19,36 @@ class NextendTreebase {
     var $improvedStartLevel;
     var $opened;
     var $openedlevels;
+    
+    var $ajax = false;
+    var $ajaxlifetime = 1000;
+	
+	var $res = array();
 
     function NextendTreebase(&$menu, &$module, &$data) {
 
         $this->_menu = $menu;
         $this->_module = $module;
         $this->_data = $data;
+        $ajax = (array)NextendParse::parse($this->_data->get('ajax', '0|*|1000'));
+        if(isset($ajax[0]) && $ajax[0]) $this->ajax = 1;
+        if(isset($ajax[1]) && intval($ajax[1])) $this->ajaxlifetime = intval($ajax[1]);
     }
 
     function generateItems() {
-
-        $this->allItems = $this->getAllItems();
         $this->items = $this->getItemsTree();
     }
 
     function getItems() {
+        if($this->ajax){
+            $cache = NextendCacheData::getInstance();
+            $a = $cache->cache('mod_accordionmenu', $this->ajaxlifetime, array($this, 'filterItems'), array($this->_menu->_cachehash));
+        }else{
+            $a = $this->filterItems();
+        }
+        
+        $this->helper = $a[0];
+        $this->allItems = $a[1];
 
         /*
           If COOKIE tracking enabled
@@ -49,7 +66,8 @@ class NextendTreebase {
                 }
             }
         }
-        $this->filterItems();
+        
+        
         $this->active = $this->getActiveItem();
         $root = 0;
         if (isset($this->active)) {
@@ -122,10 +140,12 @@ class NextendTreebase {
         return $this->getChilds($p, 1);
     }
 
-    function filterItems() {
+    function filterItems($cachehash = '') {
 
-        $this->helper = array();
-        foreach ($this->allItems as $item) {
+        $allItems = $this->getAllItems();
+        
+        $helper = array();
+        foreach ($allItems as $item) {
             if (!is_object($item))
                 continue;
             $item->p = false; // parent
@@ -143,8 +163,9 @@ class NextendTreebase {
             }
             $item->active = false; // Active
 
-            $this->helper[$item->parent][] = $item;
+            $helper[$item->parent][] = $item;
         }
+        return array($helper, $allItems);
     }
 
     function getChilds(&$parent, $level) {
@@ -188,20 +209,33 @@ class NextendTreebase {
 
         return 0;
     }
+    
+    function getRes(){
+        return $this->res;
+    }
 
     function render($template) {
-
         $this->pointer = 0;
         $this->itemsCount = count($this->items);
         $this->_template = $template;
         $this->stack = array();
         $this->level = 1;
         $this->up = false;
+        
+
+        if($this->ajax){
+            $this->renderCached = $this->checkRes();
+        }else{
+            $this->renderCached = false;
+        }
         $this->renderItem();
+		
+    		if(count($this->res)){
+    			$this->cacheRes();
+    		}
     }
 
     function renderItem() {
-
         while ($this->pointer < $this->itemsCount) {
             $content = '';
             $item = & $this->items[$this->pointer++];
@@ -212,12 +246,20 @@ class NextendTreebase {
         }
         if ($this->up) {
             while ($this->level > 1) {
-                echo "</dl></dd>";
-                array_pop($this->stack);
+                echo "</dl>";
+                $this->endItem(array_pop($this->stack));  //dd close
                 $this->level = count($this->stack);
             }
             $this->up = false;
         }
+    }
+    
+    function endItem($item){
+        if($this->ajax && (!$this->renderCached || $item->opened)){
+            $this->res[$item->id] = ob_get_clean();
+            if($item->opened) echo $this->res[$item->id];
+        }
+        echo "</dd>";
     }
 
     function initConfig() {
@@ -267,6 +309,28 @@ class NextendTreebase {
     function renderProductnum($productnum) {
         return '<span class="nextend-productnum">' . $productnum . '</span>';
     }
+	
+  	function cacheRes(){
+        $cache = NextendCacheData::getInstance();
+        return $cache->cache('mod_accordionmenu', $this->ajaxlifetime, array($this, 'getRes'), array($this->_menu->_cachehash.'-'.$this->_menu->_cachemoduleid));
+  	}
+	
+  	function checkRes(){
+        $cache = NextendCacheData::getInstance();
+        return $cache->check('mod_accordionmenu', array($this, 'getRes'), array($this->_menu->_cachehash.'-'.$this->_menu->_cachemoduleid));
+  	}
+  	
+  	function renderChild($parent, $hash = ''){
+        if(!$this->checkRes()){
+            ob_start();
+            $this->_menu->render();
+            ob_clean();
+            $res = $this->res;
+        }else{
+            $res = $this->cacheRes();
+        }
+    		if(isset($res[$parent])) echo $res[$parent];
+  	}
 
 }
 

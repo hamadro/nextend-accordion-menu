@@ -18,11 +18,16 @@ class NextendJavascriptjQuery {
         if (!is_object($instance)) {
             $instance = new NextendJavascriptjQuery();
             $instance->addJsLibraryFile('njQuery.js');
-            if(nextendIsWordPress()){
-                wp_enqueue_script('jquery');
-            }else{
+            /*if(nextendIsWordPress()){
+                global $wp_version;
+                if (version_compare($wp_version, '3.6', 'ge')) {
+                    wp_enqueue_script('jquery');
+                }else{
+                    $instance->addJsLibraryFile('jQuery.js');
+                }
+            }else{*/
                 $instance->addJsLibraryFile('jQuery.js');
-            }
+            //}
             $instance->addJsLibraryFile('uacss.js');
             $instance->addJsLibraryFile('jquery.unique-element-id.js');
         }
@@ -63,7 +68,7 @@ class NextendJavascriptjQuery {
     */
     
     function addJsLibraryFile($file) {
-    
+    /*
         if(nextendIsWordPress()){
             global $wp_version;
             if (version_compare($wp_version, '3.6', 'ge')) {
@@ -100,7 +105,7 @@ class NextendJavascriptjQuery {
                     break;
                 }
             }
-        }
+        }*/
         $file = NextendFilesystem::getBasePath().NextendFilesystem::getLibraryPath() . 'javascript/jquery/1.9.1/' . $file;
         $this->addJsFile($file);
         
