@@ -37,6 +37,8 @@ class NextendMenuJoomla extends NextendMenu {
             $this->_cachemoduleid = $ajax_moduleid;
         }
         
+        $this->_cachehash.=$this->_cachemoduleid;
+        
         $this->_module = $module;
         $this->setThemePath();
         $this->setInstance();

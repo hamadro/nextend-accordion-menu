@@ -365,7 +365,8 @@
             dojo.removeClass(dd, 'opening');
             if(this.usecookies){
                 dojo.cookie(this.instance + '-' + this.getNavClass(dt), 1, {
-                    expires: 1
+                    expires: 1,
+                    path: '/'
                 });
             }
             
@@ -391,7 +392,8 @@
             dojo.removeClass(dd, 'closing');
             if(this.usecookies){
                 dojo.cookie(this.instance + '-' + this.getNavClass(dt), 1, {
-                    expires: -1
+                    expires: -1,
+                    path: '/'
                 });
             }
             

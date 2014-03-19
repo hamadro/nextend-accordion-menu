@@ -5,11 +5,12 @@ nextendimport('nextend.form.element.list');
 class NextendElementJoomshoppingmenuitems extends NextendElementList {
 
     function fetchElement() {
-
-        $db = JFactory::getDBO();
-        $lang = JFactory::getLanguage()->getTag();
+	require_once(JPATH_SITE."/components/com_jshopping/lib/factory.php");
+	$jshopConfig = JSFactory::getConfig();
+	$db = JFactory::getDBO();
+	$lang = JFactory::getLanguage()->getTag();
         
-        $query = "SELECT m.category_id AS id, `name_$lang` AS title, `name_$lang` AS name, m.category_parent_id AS parent_id, m.category_parent_id as parent
+        $query = "SELECT m.category_id AS id, IF(`name_$lang`<>'',`name_$lang`,`name_".$jshopConfig->frontend_lang."`) AS title, IF(`name_$lang`<>'',`name_$lang`,`name_".$jshopConfig->frontend_lang."`) AS name, m.category_parent_id AS parent_id, m.category_parent_id as parent
               FROM #__jshopping_categories AS m
               LEFT JOIN #__jshopping_products_to_categories AS f
               ON m.category_id = f.category_id
