@@ -3,7 +3,7 @@
 Plugin Name: Nextend Accordion Menu
 Plugin URI: http://nextendweb.com/
 Description: User-friendly, highly customizable and easy to integrate menu solution to build custom accordion menus from any WordPress menu.
-Version: 9.2.5
+Version: 9.2.6
 Author: Nextend
 Author URI: http://www.nextendweb.com
 License: GPL2
