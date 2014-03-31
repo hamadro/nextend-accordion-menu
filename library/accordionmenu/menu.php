@@ -99,7 +99,7 @@ class NextendMenu {
             new AccordionMenu({
                 node: dojo.query('#" . $this->getId() . " dl.level1')[0],
                 instance: '" . $this->getId() . "',
-                url: '".(nextendIsJoomla() ? JUri::root(true) : '')."/',
+                url: '".$this->getAjaxUrl()."',
                 moduleid: ".$this->id.",
                 classPattern: /" . $this->_classPrefix . "[0-9]+/,
                 mode: '" . $data->get('mode', 'onclick') . "', 
@@ -115,6 +115,10 @@ class NextendMenu {
                 tooltipclose:  '" . $tooltip[2] . "'
             });
         ");
+    }
+    
+    function getAjaxUrl(){
+        return '';
     }
     
     function addCSS() {

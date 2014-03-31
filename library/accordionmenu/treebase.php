@@ -329,7 +329,7 @@ class NextendTreebase {
         }else{
             $res = $this->cacheRes();
         }
-    		if(isset($res[$parent])) echo $res[$parent];
+    		if(isset($res[$parent])) return $res[$parent];
   	}
 
 }
