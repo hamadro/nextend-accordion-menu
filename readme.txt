@@ -2,9 +2,9 @@
 Contributors: nextendweb 
 Tags: accordion menu, menu, navigation, accordion, widget, themes, nextend
 Donate link: https://www.facebook.com/nextendweb
-Requires at least: 3.0
-Tested up to: 3.5.1
-Stable tag: 9.2.7
+Requires at least: 3.5
+Tested up to: 3.9.0
+Stable tag: 9.2.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,9 @@ Please read this [documentation page](http://www.nextendweb.com/wiki/accordion-m
 5. Screenshot from the theme management, set everything without CSS coding.
 
 == Changelog ==
+
+= 9.2.8 =
+* Some changes in nextend framework
 
 = 9.2.7 =
 * Some changes in nextend framework

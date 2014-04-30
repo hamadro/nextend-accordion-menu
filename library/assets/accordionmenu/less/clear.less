@@ -116,12 +116,12 @@
     }
     
     .css3animationimproved(@a) when (@a = 2) {
+        transform: translate3d(0px, 0px, 0px);
         .transition(@animationinterval, @animationopening);
     }
     
     dl{
         zoom: 1;
-        transform: translate3d(0px, 0px, 0px);
         .css3animationimproved(@accordionmode);
     }
     
@@ -132,9 +132,13 @@
             top: @snaptobottom;
             .snaptobottom(@snaptobottom);
         }
+        
+        .hiddenwhennowcss3(@a) when (@a = 0) {
+            display: none;
+        }
     
         dd{
-            display: none;
+            .hiddenwhennowcss3(@css3animation);
             overflow: hidden;
             height: 0px;
             width: 100%;

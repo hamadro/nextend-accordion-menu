@@ -187,6 +187,9 @@ class NextendTreebase {
                     if (count($childs) > 0)
                         $h->p = true;
                     $h->level = $level;
+                    if(isset($this->openedlevels[$level]) && $h->p){
+                        $h->opened = true;
+                    }
                     $items[] = & $h;
                     $i = count($items);
                     array_splice($items, $i, 0, $childs);
