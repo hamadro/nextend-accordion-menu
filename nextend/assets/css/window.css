@@ -12,6 +12,11 @@
     font-family: 'Open Sans', Arial, sans-serif;
 }
 
+.wp-admin #nextend-fontmanager-lightbox,
+.wp-admin .nextend-window{
+    z-index:10000;
+}
+
 #config_edit_form .nextend-window,
 #nextend-fontmanager-lightbox,
 #content-box .nextend-window{
