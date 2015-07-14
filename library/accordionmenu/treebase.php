@@ -23,9 +23,9 @@ class NextendTreebase {
     var $ajax = false;
     var $ajaxlifetime = 1000;
 	
-	var $res = array();
+	  var $res = array();
 
-    function NextendTreebase(&$menu, &$module, &$data) {
+    function __construct(&$menu, &$module, &$data) {
 
         $this->_menu = $menu;
         $this->_module = $module;

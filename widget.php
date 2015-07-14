@@ -2,9 +2,9 @@
 
 class NextendAccordionMenuWidget extends WP_Widget {
 
-    function NextendAccordionMenuWidget() {
+    function __construct() {
         $widget_ops = array('classname' => 'NextendAccordionMenuWidget', 'description' => 'Displays an Accordion Menu');
-        $this->WP_Widget('NextendAccordionMenuWidget', 'Nextend Accordion Menu', $widget_ops);
+        parent::__construct('NextendAccordionMenuWidget', 'Nextend Accordion Menu', $widget_ops);
     }
 
     function form($instance) {

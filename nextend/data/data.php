@@ -5,7 +5,7 @@ class NextendData {
     
     var $_data;
     
-    function NextendData() {
+    function __construct() {
         
         $this->_data = array();
     }

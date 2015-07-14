@@ -6,7 +6,7 @@ class NextendParseFont{
     
     var $_font;
     
-    function NextendParseFont($font){
+    function __construct($font){
         $this->_font = json_decode($font, true);
     }
     

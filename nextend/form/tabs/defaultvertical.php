@@ -3,11 +3,11 @@ nextendimport('nextend.form.tab');
 
 class NextendTabDefaultVertical extends NextendTab {
 
-    function NextendTabDefaultVertical(&$form, &$xml) {
+    function __construct(&$form, &$xml) {
         $css = NextendCss::getInstance();
         $css->addCssLibraryFile('tabs/defaultvertical.css');
         $this->_matrixname = NextendXmlGetAttribute($xml, 'name');
-        parent::NextendTab($form, $xml);
+        parent::__construct($form, $xml);
     }
     
     function decorateGroupStart() {

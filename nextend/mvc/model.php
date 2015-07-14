@@ -2,7 +2,7 @@
 class NextendModel{
     var $_controller;
     
-    function  NextendModel($controller){
+    function  __construct($controller){
        $this->_controller =  $controller;
     }
 

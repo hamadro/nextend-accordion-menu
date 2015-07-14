@@ -8,11 +8,11 @@ class NextendCacheImage extends NextendCache {
     
     var $backgrouncolor;
     
-    function NextendCacheImage() {
+    function __construct() {
 
         $this->_subfolder = 'image' . DIRECTORY_SEPARATOR;
         $this->backgrouncolor = array(0,0,0);
-        parent::NextendCache();
+        parent::__construct();
         
         if($this->_cacheTime == 'static' || $this->_cacheTime == 0){
             $this->_folder = $this->_path . 'static' . DIRECTORY_SEPARATOR;

@@ -4,7 +4,7 @@ class NextendFontsGoogle {
     
     var $_fonts = array();
     
-    function NextendFontsGoogle() {
+    function __construct() {
         $this->_fonts = array();
     }
     

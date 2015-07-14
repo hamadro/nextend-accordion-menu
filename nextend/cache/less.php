@@ -9,9 +9,9 @@ class NextendCacheLess extends NextendCache{
     
     var $_less;
     
-    function NextendCacheLess(){
+    function __construct(){
         $this->_subfolder = 'less'.DIRECTORY_SEPARATOR;
-        parent::NextendCache();
+        parent::__construct();
         $this->_filetype = 'css';
         $this->_less = new nlessc();
         $this->_less->addImportDir(NEXTENDLIBRARYASSETS . DIRECTORY_SEPARATOR . 'less' . DIRECTORY_SEPARATOR);

@@ -6,7 +6,7 @@ class NextendJavascriptDojo {
     
     var $_jsFiles;
     
-    function NextendJavascriptDojo() {
+    function __construct() {
         $this->_js = '';
 
         $this->_jsFiles = array();

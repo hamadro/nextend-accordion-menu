@@ -3,9 +3,9 @@ nextendimport('nextend.cache.cache');
 
 class NextendCacheCss extends NextendCache {
 
-    function NextendCacheCss() {
+    function __construct() {
         $this->_subfolder = 'css' . DIRECTORY_SEPARATOR;
-        parent::NextendCache();
+        parent::__construct();
         $this->_filetype = 'css';
         $this->_gzip = getNextend('gzip', 0);
     }

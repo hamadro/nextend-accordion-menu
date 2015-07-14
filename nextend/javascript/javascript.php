@@ -16,7 +16,7 @@ class NextendJavascript {
     
     var $_echo;
     
-    function NextendJavascript() {
+    function __construct() {
         $this->_js = '';
         $this->_inlinejs = '';
         $this->_jsFiles = array();

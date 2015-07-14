@@ -10,8 +10,8 @@ class NextendMenuWordpress extends NextendMenu {
     var $_data;
     var $_widget;
 
-    function NextendMenuWordpress(&$widget, &$instance, $path) {
-        parent::NextendMenu($path);
+    function __construct(&$widget, &$instance, $path) {
+        parent::__construct($path);
         $this->_data = new NextendData();
         
         if(!isset($instance['accordionmenu'])){

@@ -33,7 +33,7 @@ class NextendController{
     
     var $_tplName;
     
-    function NextendController($key){
+    function __construct($key){
         $this->fixMagicQuotes();
         $this->_baseControllerPath = dirname(__FILE__);
         $this->_routeMap = array();

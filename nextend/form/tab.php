@@ -13,7 +13,7 @@ class NextendTab {
 
     var $_elements;
 
-    function NextendTab(&$form, &$xml) {
+    function __construct(&$form, &$xml) {
 
         $this->_form = $form;
         $this->_xml = $xml;

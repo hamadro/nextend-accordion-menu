@@ -6,7 +6,7 @@ class NextendJavascriptjQuery {
     
     var $_jsFiles;
     
-    function NextendJavascriptjQuery() {
+    function __construct() {
         $this->_js = '';
 
         $this->_jsFiles = array();

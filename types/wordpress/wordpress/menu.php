@@ -8,9 +8,9 @@ class NextendTreeWordpress extends NextendTreebaseWordpress {
     var $parentName;
     var $name;
 
-    function NextendTreeWordpress(&$menu, &$module, &$data) {
+    function __construct(&$menu, &$module, &$data) {
 
-        parent::NextendTreebase($menu, $module, $data);
+        parent::__construct($menu, $module, $data);
         $this->initConfig();
     }
 
@@ -77,14 +77,22 @@ class NextendTreeWordpress extends NextendTreebaseWordpress {
     }
     
     function find_active( $sorted_menu_items ){
+        $closestActive = null;
         foreach ( $sorted_menu_items as $menu_item ) {
-            if ( $menu_item->current ) {
-                $active = new stdClass();
-                $active->id = $menu_item->ID;
-                $active->parent = $menu_item->menu_item_parent;
-                $this->active = $active;
+            if ($menu_item->current) {
+                $closestActive = $menu_item;
                 break;
+            }else if ($menu_item->current_item_parent ) {
+                $closestActive = $menu_item;
+            }else if (!$closestActive && $menu_item->current_item_ancestor ){
+                $closestActive = $menu_item;
             }
+        }
+        if($closestActive){
+            $active = new stdClass();
+            $active->id = $closestActive->ID;
+            $active->parent = $closestActive->menu_item_parent;
+            $this->active = $active;
         }
         return $sorted_menu_items;
     }

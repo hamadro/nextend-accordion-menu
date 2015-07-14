@@ -8,10 +8,10 @@ class NextendImage extends NextendCache {
     
     var $_im = null;
     
-    function NextendImage() {
+    function __construct() {
 
         $this->_subfolder = 'image' . DIRECTORY_SEPARATOR;
-        parent::NextendCache();
+        parent::__construct();
         $this->_filetype = 'png';
         
         if($this->_cacheTime == 'static' || $this->_cacheTime == 0){

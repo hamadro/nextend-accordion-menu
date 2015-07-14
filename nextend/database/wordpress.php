@@ -8,7 +8,7 @@ class NextendDatabase extends NextendDatabaseAbstract {
     
     var $nameQuote = '`';
 
-    function NextendDatabase() {
+    function __construct() {
         global $wpdb;
         $this->db = $wpdb;
         $wpdb->show_errors();

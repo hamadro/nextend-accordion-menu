@@ -6,11 +6,11 @@ class NextendTabFontmatrix extends NextendTab {
     
     var $biggestindex = 0;
 
-    function NextendTabFontmatrix(&$form, &$xml) {
+    function __construct(&$form, &$xml) {
         $css = NextendCss::getInstance();
         $css->addCssLibraryFile('tabs/fontmatrix.css');
         $this->_matrixname = NextendXmlGetAttribute($xml, 'name');
-        parent::NextendTab($form, $xml);
+        parent::__construct($form, $xml);
     }
 
     function initElements() {

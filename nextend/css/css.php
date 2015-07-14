@@ -22,7 +22,7 @@ class NextendCss {
 
     var $_echo;
 
-    function NextendCss() {
+    function __construct() {
 
         $this->_css = '';
         $this->_cssGroup = array();

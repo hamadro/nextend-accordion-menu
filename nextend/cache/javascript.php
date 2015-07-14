@@ -5,9 +5,9 @@ class NextendCacheJavascript extends NextendCache{
     
     var $_inline;
     
-    function NextendCacheJavascript(){
+    function __construct(){
         $this->_subfolder = 'js'.DIRECTORY_SEPARATOR;
-        parent::NextendCache();
+        parent::__construct();
         $this->_filetype = 'js';
         $this->_inline = '';
         $this->_gzip = getNextend('gzip', 0);

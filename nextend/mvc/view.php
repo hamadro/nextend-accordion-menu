@@ -6,7 +6,7 @@ class NextendView {
     var $_path;
     var $_fragmentsPath;
 
-    function NextendView($controller) {
+    function __construct($controller) {
         $this->_controller = $controller;
     }
 

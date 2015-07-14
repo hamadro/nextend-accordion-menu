@@ -3,10 +3,10 @@ nextendimport('nextend.form.tab');
 
 class NextendTabHorizontal extends NextendTab {
     
-    function NextendTabHorizontal(&$form, &$xml) {
+    function __construct(&$form, &$xml) {
         $css = NextendCss::getInstance();
         $css->addCssLibraryFile('tabs/horizontal.css');
-        parent::NextendTab($form, $xml);
+        parent::__construct($form, $xml);
     }
    
     function decorateTitle() {

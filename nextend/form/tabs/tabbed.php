@@ -5,10 +5,10 @@ class NextendTabTabbed extends NextendTab {
 
     var $_tabs;
     
-    function NextendTabTabbed(&$form, &$xml) {
+    function __construct(&$form, &$xml) {
         $css = NextendCss::getInstance();
         $css->addCssLibraryFile('tabs/tabbed.css');
-        parent::NextendTab($form, $xml);
+        parent::__construct($form, $xml);
     }
     
     function initTabs() {

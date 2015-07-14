@@ -20,7 +20,7 @@ class NextendCache{
     
     var $_gzip;
     
-    function NextendCache(){
+    function __construct(){
         $this->_gzip = 0;
         $this->_path = NextendFilesystem::getCachePath().$this->_subfolder;
         $this->createCacheFolder($this->_path);

@@ -12,11 +12,11 @@ class NextendForm extends NextendData {
     
     var $_tabs;
     
-    function NextendForm() {
+    function __construct() {
         $this->_xml = null;
         $this->_tabs = array();
         NextendText::l('common');
-        parent::NextendData();
+        parent::__construct();
         $this->loadQtip();
         
     }
