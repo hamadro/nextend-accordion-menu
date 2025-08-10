@@ -10,31 +10,58 @@ on:
 jobs:
   php-tests:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 15  # زيادة وقت التنفيذ لتجنب الإلغاء التلقائي
     strategy:
       matrix:
         php-version: [ '8.0', '8.1', '8.2' ]
 
     steps:
-    # 1. يسحب الكود من الريبو
+    # 1. تحميل الكود من المستودع
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # 2. يثبت إصدار PHP المطلوب من المصفوفة لكل Job
+    # 2. تثبيت إصدار PHP مع Composer مدمج
     - name: Setup PHP ${{ matrix.php-version }}
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-version }}
+        tools: composer  # تثبيت Composer تلقائيًا
+        coverage: none  # تعطيل تغطية الاختبارات لتقليل الحمل
 
-    # 3. يثبت Composer إذا لم يكن موجوداً
-    - name: Install Composer
-      run: sudo apt-get update && sudo apt-get install -y composer
-
-    # 4. يثبت مكتبة PHPCompatibility ويجهزها
+    # 3. تثبيت مكتبة PHPCompatibility
     - name: Install PHPCompatibility
       run: |
-        composer require --dev phpcompatibility/php-compatibility
+        composer require --dev phpcompatibility/php-compatibility --no-interaction --no-progress
         ./vendor/bin/phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility
+
+    # 4. فحص التوافق مع تجاهل مجلد vendor
+    - name: Check for Deprecated Functions
+      run: |
+        # تجاهل مجلد vendor والمجلدات غير المهمة
+        ./vendor/bin/phpcs . --standard=PHPCompatibility --runtime-set testVersion 8.0- \
+          --ignore=*/vendor/*,*/node_modules/*,*/tests/*,*/tmp/* \
+          -d memory_limit=512M  # زيادة حد الذاكرة
+
+    # 5. فحص بناء الجملة مع تجاهل مجلد vendor
+    - name: PHP Syntax Check
+      run: |
+        # البحث عن ملفات PHP وتجاهل مجلدات معينة
+        find . -type f -name "*.php" \
+          -not -path "*/vendor/*" \
+          -not -path "*/node_modules/*" \
+          -not -path "*/tests/*" \
+          -not -path "*/tmp/*" \
+          | xargs -n 1 -P 4 php -l  # معالجة متوازية لتسريع العملية
+
+    # 6. (اختياري) حفظ التقرير كـ Artifact
+    - name: Upload compatibility report
+      if: always()  # التنفيذ حتى في حالة الفشل
+      uses: actions/upload-artifact@v3
+      with:
+        name: php-compatibility-report-${{ matrix.php-version }}
+        path: |
+          phpcs_*.txt
+          error_log        ./vendor/bin/phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility
 
     # 5. يفحص المشروع بحثاً عن الدوال والمتغيرات المنتهية الصلاحية أو غير المتوافقة مع PHP 8+
     - name: Check for Deprecated Functions
