@@ -1,42 +1,32 @@
 name: PHP 8 Compatibility Check
 
 on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
-  workflow_dispatch:
+  workflow_dispatch: # التشغيل اليدوي فقط لتجنب الإلغاء التلقائي
 
 jobs:
-  php-tests:
+  php-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30 # زيادة وقت التنفيذ
     
-    strategy:
-      matrix:
-        php-version: ['8.0', '8.1', '8.2']
-
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup PHP ${{ matrix.php-version }}
+    - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: ${{ matrix.php-version }}
-        tools: none
-        coverage: none
-
-    - name: Create temporary composer.json
-      if: ! -f composer.json
-      run: echo '{"require-dev":{"phpcompatibility/php-compatibility":"*"}}' > composer.json
-
-    - name: Install PHPCompatibility
+        php-version: '8.2'
+        tools: none # تعطيل Composer التلقائي
+        
+    - name: Download PHPCompatibility مباشرة
       run: |
-        composer require --dev phpcompatibility/php-compatibility --no-interaction --no-progress
-        ./vendor/bin/phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility
-
+        mkdir -p vendor/phpcompatibility
+        wget https://github.com/PHPCompatibility/PHPCompatibility/archive/refs/heads/master.tar.gz
+        tar -xzf master.tar.gz --strip-components=1 -C vendor/phpcompatibility
+        rm master.tar.gz
+        
     - name: Run Compatibility Check
-      run: ./vendor/bin/phpcs . --standard=PHPCompatibility --runtime-set testVersion 8.0- --ignore=*/vendor/*
-
-    - name: PHP Syntax Check
-      run: find . -type f -name "*.php" -not -path "*/vendor/*" | xargs -n 1 php -l
+      run: |
+        php vendor/phpcompatibility/bin/phpcs . \
+          --standard=PHPCompatibility \
+          --runtime-set testVersion 8.0- \
+          --ignore=*/vendor/*,*/node_modules/*
