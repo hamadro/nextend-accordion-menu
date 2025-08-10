@@ -1,38 +1,45 @@
-
-name: PHP 8 Compatibility CI
+name: PHP 8 Compatibility Check
 
 on:
   push:
-    branches: [main, master]
+    branches: [ main, master ]
   pull_request:
-    branches: [main, master]
-  workflow_dispatch:  # يسمح بالتشغيل اليدوي
+    branches: [ main, master ]
+  workflow_dispatch:
 
 jobs:
-  php-compatibility:
+  php-tests:
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
-        php-version: ['8.0', '8.1', '8.2']  # إصدارات PHP المطلوبة
-    
+        php-version: [ '8.0', '8.1', '8.2' ]
+
     steps:
+    # 1. يسحب الكود من الريبو
     - name: Checkout code
       uses: actions/checkout@v4
-    
+
+    # 2. يثبت إصدار PHP المطلوب من المصفوفة لكل Job
     - name: Setup PHP ${{ matrix.php-version }}
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-version }}
-        tools: composer  # تثبيت Composer تلقائيًا
-        
-    - name: Install dependencies
-      run: composer install --no-progress --no-suggest
-      
-    - name: Run PHPCompatibility check
+
+    # 3. يثبت Composer إذا لم يكن موجوداً
+    - name: Install Composer
+      run: sudo apt-get update && sudo apt-get install -y composer
+
+    # 4. يثبت مكتبة PHPCompatibility ويجهزها
+    - name: Install PHPCompatibility
       run: |
-        vendor/bin/phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility
-        vendor/bin/phpcs . --standard=PHPCompatibility --runtime-set testVersion 8.0- --ignore=*/vendor/*
-        
-    - name: PHP Syntax check
-      run: find . -type f -name "*.php" -not -path "*/vendor/*" | xargs -n 1 php -l
+        composer require --dev phpcompatibility/php-compatibility
+        ./vendor/bin/phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility
+
+    # 5. يفحص المشروع بحثاً عن الدوال والمتغيرات المنتهية الصلاحية أو غير المتوافقة مع PHP 8+
+    - name: Check for Deprecated Functions
+      run: ./vendor/bin/phpcs . --standard=PHPCompatibility --runtime-set testVersion 8.0-
+
+    # 6. يفحص جميع ملفات PHP Syntax Check ليظهر أي أخطاء برمجية
+    - name: PHP Syntax Check
+      run: find . -type f -name "*.php" | xargs -n 1 php -l
